@@ -71,7 +71,7 @@ export default function Contact() {
         </motion.a>
 
         <motion.a
-          href="https://www.linkedin.com/in/gabriellakhayutin"
+          href="https://www.linkedin.com/in/gabriella-khayutin-6a6847229/"
           target="_blank"
           rel="noopener noreferrer"
           className="px-6 py-3 bg-blue-500 text-white rounded-full font-semibold shadow-lg transition relative overflow-hidden"
