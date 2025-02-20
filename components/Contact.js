@@ -83,6 +83,24 @@ export default function Contact() {
           🔗 LinkedIn
         </motion.a>
       </motion.div>
+
+      {/* CV Download Button */}
+      <motion.div 
+        className="mt-6 z-10 relative"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 0.8 }}
+      >
+        <a href="/Gabriella-Khayutin-CV.pdf" download="Gabriella-Khayutin-CV.pdf">
+          <motion.button 
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            className="px-6 py-3 bg-white text-black rounded-full font-semibold shadow-lg hover:bg-gray-200 transition duration-300"
+          >
+            📄 Download My CV
+          </motion.button>
+        </a>
+      </motion.div>
     </section>
   );
 }
