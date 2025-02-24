@@ -15,6 +15,15 @@ const generateStars = (count) => {
 // Projects Data
 const projects = [
   {
+    title: "IdeaPolish.ai",
+    description: "An AI-powered startup idea refiner.",
+    date: "2025",
+    details: "IdeaPolish.ai is an AI-driven tool that helps entrepreneurs refine and enhance their startup ideas. The platform provides AI-generated insights based on industry trends, competitive analysis, and startup best practices. My role includes full-stack development using React and OpenAI API, integrating AI for structured feedback, optimizing UI/UX, and implementing secure user authentication.",
+    tech: ["React", "OpenAI API", "Tailwind"],
+    image: "/ideapolish.jpg",
+    repo: "https://github.com/GabriellaKhayutin1/IdeaPolish.ai",
+  },
+  {
     title: "Junker App",
     description: "An eco-conscious exchange platform.",
     date: "2024",
@@ -23,15 +32,7 @@ const projects = [
     image: "/junker.png",
     repo: "https://github.com/orgs/HZ-HBOICT-Y2-2425/teams/team-9-junker/repositories",
   },
-  {
-    title: "IdeaPolish.ai",
-    description: "An AI-powered startup idea refiner.",
-    date: "2024",
-    details: "IdeaPolish.ai is an AI-driven tool that helps entrepreneurs refine and enhance their startup ideas. The platform provides AI-generated insights based on industry trends, competitive analysis, and startup best practices. My role includes full-stack development using React and OpenAI API, integrating AI for structured feedback, optimizing UI/UX, and implementing secure user authentication.",
-    tech: ["React", "OpenAI API", "Tailwind"],
-    image: "/ideapolish.jpg",
-    repo: "https://github.com/GabriellaKhayutin1/IdeaPolish.ai",
-  },
+ 
   {
     title: "NASA APOD Slideshow",
     description: "A website displaying NASA's latest Astronomy Picture of the Day as a slideshow.",
@@ -45,7 +46,7 @@ const projects = [
     
     title: "Security Website",
     description: "A professional security company website.",
-    date: "2023",
+    date: "2024",
     details: "I led the development of a high-performance website for Global Security Advising Homeland Solutions. Responsibilities included stakeholder collaboration, requirement analysis, wireframing, frontend and backend development using Laravel and PHP, and overseeing User Acceptance Testing (UAT). The final product enhanced the company’s online presence and reflected its dedication to security and reliability.",
     tech: ["Laravel", "Tailwind", "PHP"],
     image: "/security.png",
@@ -54,6 +55,7 @@ const projects = [
   {
     title: "JRCZ Data Science Project",
     description: "A data processing tool for neighborhood location mapping.",
+    date: "2024",
     details: "I developed a data processing tool for JRCZ to streamline their neighborhood mapping workflow. The tool allows users to upload a GeoPackage file, which is then converted into JSON format. An interactive map enables users to select specific areas and instantly retrieve coordinates, IDs, and names. This solution automated a previously manual process, significantly improving efficiency and accuracy.",
     tech: ["HTML", "MySQL", "Laravel"],
     image: "/JRCZ.png",
@@ -62,7 +64,7 @@ const projects = [
   {
     title: "Tetra’s Adventure",
     description: "An interactive educational game for kids.",
-    date: "2022",
+    date: "2023",
     details: "Tetra is a fun and engaging educational game designed to teach kids problem-solving skills. Developed as a team project, it involved game design, coding, and user experience testing. The game was created with JavaScript, HTML5, and CSS, prioritizing an intuitive and enjoyable learning environment.",
     tech: ["JavaScript", "HTML5", "CSS"],
     image: "/tetra.jpeg",
