@@ -17,8 +17,8 @@ const projects = [
     title: "Smart Storage",
     description: "A website in which a user can store their ingredients and get reminders for expired ingredients.",
     date: "2025",
-    details: "A full-stack web app that allows users to store pantry items, get notifications for expiring ingredients, and manage grocery shopping efficiently.",
-    tech: ["React", "OpenAI API", "Tailwind"],
+    details: "Smart Storage is a full-stack web app that helps users track their pantry ingredients, receive expiration notifications, and efficiently manage grocery shopping. It ensures users never waste food by automatically reminding them of expiring items.\n\nKey Features:\n✅ Ingredient Tracking – Users can add, edit, and remove pantry items\n✅ Expiration Alerts – Sends reminders for items that are about to expire\n✅ AI-Powered Recipe Suggestions – Uses AI to suggest recipes based on ingredients\n✅ Grocery List Generator – Helps users create a smart shopping list",
+    tech: ["JavaScript", "OpenAI API", "Tailwind", "MongoDB", "Node.js", "Html", "CSS"],
     images: ["/smartstorage.png", "/smartstorage2.png", "/smartstorage3.png"],
     repo: "https://github.com/GabriellaKhayutin1/IdeaPolish.ai",
   },
@@ -26,8 +26,8 @@ const projects = [
     title: "IdeaPolish.ai",
     description: "An AI-powered startup idea refiner.",
     date: "2025",
-    details: "IdeaPolish.ai is an AI-driven tool that helps entrepreneurs refine and enhance their startup ideas...",
-    tech: ["React", "OpenAI API", "Tailwind"],
+    details: "IdeaPolish.ai is an AI-driven tool that helps entrepreneurs refine and enhance their startup ideas. The platform provides structured feedback based on industry trends, competitive analysis, and best startup practices.\n\nKey Features:\n✅ AI-Powered Insights – Generates suggestions for business improvement\n✅ Competitive Analysis – Compares ideas with existing market trends\n✅ User Authentication & Dashboard – Allows users to save their analyses",
+    tech: ["React", "OpenAI API", "Tailwind", "JavaScript", "Node.js"],
     images: ["/ideapolish.jpg", "/ideapolish2.jpg"],
     repo: "https://github.com/GabriellaKhayutin1/IdeaPolish.ai",
   },
@@ -35,17 +35,17 @@ const projects = [
     title: "Junker App",
     description: "An eco-conscious exchange platform.",
     date: "2024",
-    details: "Junker is a sustainable exchange platform designed to encourage young adults to adopt eco-friendly consumer behaviors...",
-    tech: ["Next.js", "Tailwind", "Node.js"],
-    images: ["/junker.png", "/junker2.png"],
+    details: "Junker is a sustainable exchange platform designed to encourage young adults to adopt eco-friendly consumer behaviors. The app allows users to swap and trade second-hand items, reducing waste and promoting sustainability.\n\nKey Features:\n✅ Tinder-style Swiping System – Browse and like items easily\n✅ Secure Trading System – Ensures smooth & safe transactions\n✅ Community-Driven Exchange – Connects users in a sustainable way",
+    tech: ["Next.js", "Tailwind", "Node.js", "Microservices Architecture", "tailwind"],
+    images: ["/junker.png", "/junker1.jpeg"],
     repo: "https://github.com/orgs/HZ-HBOICT-Y2-2425/teams/team-9-junker/repositories",
   },
   {
     title: "NASA APOD Slideshow",
     description: "A website displaying NASA's latest Astronomy Picture of the Day as a slideshow.",
     date: "2024",
-    details: "This project fetches and displays NASA's Astronomy Picture of the Day (APOD) using NASA’s public API...",
-    tech: ["JavaScript", "React", "NASA API"],
+    details: "A React-based interactive slideshow that fetches and displays NASA’s Astronomy Picture of the Day (APOD) using NASA’s public API. It provides beautiful space images with detailed explanations.\n\nKey Features:\n✅ Daily Astronomy Picture Updates\n✅ Interactive Slideshow with smooth animations\n✅ Dark Mode Support",
+    tech: ["JavaScript", "Laravel", "NASA API", "Tailwind"],
     images: ["/nasa1page.png", "/nasa2.png"],
     repo: "https://github.com/GabriellaKhayutin1/NasaApi",
   },
@@ -53,8 +53,8 @@ const projects = [
     title: "Security Website",
     description: "A professional security company website.",
     date: "2024",
-    details: "I led the development of a high-performance website for Global Security Advising Homeland Solutions...",
-    tech: ["Laravel", "Tailwind", "PHP"],
+    details: "A high-performance security company website built for Global Security Advising Homeland Solutions. It provides detailed security service offerings with a modern and reliable design.\n\nKey Features:\n✅ Professional & Secure Design\n✅ Responsive Layout for All Devices\n✅ Fast & Optimized Performance",
+    tech: ["Laravel", "Tailwind", "PHP", "MySQL", "JavaScript", "HTML", "CSS", "Node.js"],
     images: ["/security.png", "/security2.png"],
     repo: "https://github.com/NikolAlexandrova/security",
   },
@@ -62,8 +62,8 @@ const projects = [
     title: "JRCZ Data Science Project",
     description: "A data processing tool for neighborhood location mapping.",
     date: "2024",
-    details: "I developed a data processing tool for JRCZ to streamline their neighborhood mapping workflow...",
-    tech: ["HTML", "MySQL", "Laravel"],
+    details: "I developed a data processing tool for JRCZ to streamline their neighborhood mapping workflow. The tool allows users to upload a GeoPackage file, which is then converted into JSON format, and visualize geospatial data efficiently.\n\nKey Features:\n✅ Uploads GeoPackage files & extracts data\n✅ Displays interactive map with locations\n✅ Instant retrieval of coordinates, IDs, and names",
+    tech: ["HTML", "MySQL", "Laravel", "JavaScript", "Tailwind"],
     images: ["/JRCZ.png", "/JRCZ2.png"],
     repo: "https://github.com/GabriellaKhayutin1/spicyspinach09",
   },
@@ -71,12 +71,13 @@ const projects = [
     title: "Tetra’s Adventure",
     description: "An interactive educational game for kids.",
     date: "2023",
-    details: "Tetra is a fun and engaging educational game designed to teach kids problem-solving skills...",
-    tech: ["JavaScript", "HTML5", "CSS"],
+    details: "Tetra is a fun and engaging educational game designed to teach kids problem-solving skills. Developed as a team project, it involved game design, coding, and user experience testing.\n\nKey Features:\n✅ Engaging Storyline & Challenges\n✅ Kid-Friendly UI & Animations",
+    tech: ["JavaScript", "HTML5", "CSS", "TypeScript"],
     images: ["/tetra.jpeg", "/tetra2.jpeg"],
     repo: "https://github.com/Te7ra/tetrasAdventure",
   },
 ];
+
 
 
 export default function Projects() {
@@ -260,6 +261,12 @@ export default function Projects() {
         <p className="text-lg text-gray-300 mt-4 text-center">
           {selectedProject.details}
         </p>
+        {/* Project Details with Line Breaks */}
+<div className="text-lg text-gray-300 mt-4 text-center">
+  {selectedProject.details.split("\n\n").map((paragraph, index) => (
+    <p key={index} className="mb-4">{paragraph}</p>
+  ))}
+</div>
 
         {/* Technologies Used */}
         <div className="flex flex-wrap justify-center mt-6">
