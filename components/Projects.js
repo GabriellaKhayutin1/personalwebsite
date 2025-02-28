@@ -13,24 +13,28 @@ const generateStars = (count) => {
 };
 
 const projects = [
+ 
   {
     title: "Smart Storage",
     description: "A website in which a user can store their ingredients and get reminders for expired ingredients.",
     date: "2025",
+    loading: true,  // 🚀 This project is still in progress
     details: "Smart Storage is a full-stack web app that helps users track their pantry ingredients, receive expiration notifications, and efficiently manage grocery shopping. It ensures users never waste food by automatically reminding them of expiring items.\n\nKey Features:\n✅ Ingredient Tracking – Users can add, edit, and remove pantry items\n✅ Expiration Alerts – Sends reminders for items that are about to expire\n✅ AI-Powered Recipe Suggestions – Uses AI to suggest recipes based on ingredients\n✅ Grocery List Generator – Helps users create a smart shopping list",
     tech: ["JavaScript", "OpenAI API", "Tailwind", "MongoDB", "Node.js", "Html", "CSS"],
-    images: ["/smartstorage.png", "/smartstorage2.png", "/smartstorage3.png"],
+    images: ["/smartstorage.png", "/smartstorage1.png", "/smartstorage2.png", "/smartstorage3.png"],
     repo: "https://github.com/GabriellaKhayutin1/IdeaPolish.ai",
   },
   {
     title: "IdeaPolish.ai",
     description: "An AI-powered startup idea refiner.",
     date: "2025",
+    loading: true,  // 🚀 This project is still in progress
     details: "IdeaPolish.ai is an AI-driven tool that helps entrepreneurs refine and enhance their startup ideas. The platform provides structured feedback based on industry trends, competitive analysis, and best startup practices.\n\nKey Features:\n✅ AI-Powered Insights – Generates suggestions for business improvement\n✅ Competitive Analysis – Compares ideas with existing market trends\n✅ User Authentication & Dashboard – Allows users to save their analyses",
     tech: ["React", "OpenAI API", "Tailwind", "JavaScript", "Node.js"],
     images: ["/ideapolish.jpg", "/ideapolish2.jpg"],
     repo: "https://github.com/GabriellaKhayutin1/IdeaPolish.ai",
   },
+
   {
     title: "Junker App",
     description: "An eco-conscious exchange platform.",
@@ -157,116 +161,128 @@ export default function Projects() {
         </div>
 
         {/* Timeline Dot */}
-        <div
-          className={`absolute top-1/2 transform -translate-y-1/2 w-5 h-5 bg-blue-500 rounded-full shadow-lg ${
-            index % 2 === 0 ? "-left-10" : "-right-10"
-          }`}
-        ></div>
+<div className={`absolute top-1/2 transform -translate-y-1/2 w-5 h-5 bg-blue-500 rounded-full shadow-lg ${
+  index % 2 === 0 ? "-left-10" : "-right-10"
+}`}></div>
 
-        {/* Project Card */}
-        <div className="relative bg-gray-900 rounded-xl p-6 shadow-lg flex flex-col">
-          <h3 className="text-xl font-bold text-white">{project.title}</h3>
+{/* Loading Animation (if project is in progress) */}
+{project.loading && (
+  <div className="absolute top-1/2 transform -translate-y-1/2 left-6 flex items-center space-x-2">
+    <div className="w-3 h-3 bg-yellow-400 rounded-full animate-ping"></div>
+    <span className="text-yellow-400 text-sm">🚧 In Progress...</span>
+  </div>
+)}
 
-          {/* Centered Image */}
-          <div className="w-full flex justify-center">
-            <motion.img
-              src={project.images[0]}
-              alt={project.title}
-              className="w-full h-44 object-contain rounded-lg my-4"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            />
-          </div>
+{/* Project Card */}
+<div className="relative bg-gray-900 rounded-xl p-6 shadow-lg flex flex-col">
+  <h3 className="text-xl font-bold text-white">{project.title}</h3>
 
-          <p className="text-sm text-gray-400">{project.description}</p>
-          <div className="mt-4 flex justify-center">
-            <motion.button
-              className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-purple-500 hover:to-blue-500 text-white font-semibold py-2 px-4 rounded-full transition duration-300 text-sm shadow-md hover:shadow-lg"
-              whileHover={{ scale: 1.1 }}
-              onClick={() => {
-                setSelectedProject(project);
-                setSelectedImageIndex(0); // Reset image index when opening
-              }}
-            >
-              View More
-            </motion.button>
-          </div>
-        </div>
-      </motion.div>
-    ))}
-  </motion.div>
+  {/* Centered Image or Loading Animation */}
+  <div className="w-full flex justify-center">
+    {project.loading ? (
+    <div className="w-full h-32 flex items-center justify-center bg-gray-800 rounded-lg animate-pulse">
+    <span className="text-gray-300">🚧 Work in Progress...</span>
+  </div>
+  
+    ) : (
+      <motion.img
+        src={project.images[0]}
+        alt={project.title}
+        className="w-full h-44 object-contain rounded-lg my-4"
+        initial={{ opacity: 0, scale: 0.9 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      />
+    )}
+  </div>
+  <p className="text-sm text-gray-400 mt-4">{project.description}</p>
+  <div className="mt-4 flex justify-center">
+    <motion.button
+      className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-purple-500 hover:to-blue-500 text-white font-semibold py-2 px-4 rounded-full transition duration-300 text-sm shadow-md hover:shadow-lg"
+      whileHover={{ scale: 1.1 }}
+      onClick={() => {
+        setSelectedProject(project);
+        setSelectedImageIndex(0); // Reset image index when opening
+      }}
+    >
+      View More
+    </motion.button>
+  </div>
+</div>
+</motion.div>
+))}
+</motion.div>
 </div>
 
 
-      {/* MODAL POPUP */}
 <AnimatePresence>
   {selectedProject && (
     <motion.div
-      className="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-lg flex justify-center items-center z-50"
+      className="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-lg flex justify-center items-center z-50 px-4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
       <motion.div
-        className="bg-gray-900 rounded-2xl p-8 max-w-3xl w-full relative shadow-2xl border border-gray-700"
+        className="bg-gray-900 rounded-2xl p-6 sm:p-8 max-w-3xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl border border-gray-700"
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.8, opacity: 0 }}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
       >
-        {/* Close Button */}
-        <button 
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-200 text-2xl"
-          onClick={() => setSelectedProject(null)}
-        >
-          ✖
-        </button>
+      {/* Close Button - Always Accessible */}
+<button 
+  className="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-400 hover:text-gray-200 text-2xl sm:text-3xl bg-gray-800 p-2 rounded-full z-50"
+  onClick={() => setSelectedProject(null)}
+>
+  ✖
+</button>
 
-        {/* Image Gallery with Navigation */}
+
+        {/* Image Gallery */}
         <div className="relative w-full flex justify-center">
           <motion.img 
             src={selectedProject.images[selectedImageIndex]} 
             alt={selectedProject.title} 
-            className="w-full max-h-80 object-contain rounded-lg shadow-lg"
+            className="w-full max-h-[300px] object-contain rounded-lg shadow-lg"
             key={selectedImageIndex}
             initial={{ opacity: 0.7, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
           />
-          
+
           {/* Left Arrow */}
-          <button 
-            className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full shadow-md hover:bg-gray-700"
-            onClick={() => setSelectedImageIndex(prev => prev > 0 ? prev - 1 : selectedProject.images.length - 1)}
-          >
-            ◀
-          </button>
+          {selectedProject.images.length > 1 && (
+            <button 
+              className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full shadow-md hover:bg-gray-700"
+              onClick={() => setSelectedImageIndex(prev => prev > 0 ? prev - 1 : selectedProject.images.length - 1)}
+            >
+              ◀
+            </button>
+          )}
 
           {/* Right Arrow */}
-          <button 
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full shadow-md hover:bg-gray-700"
-            onClick={() => setSelectedImageIndex(prev => prev < selectedProject.images.length - 1 ? prev + 1 : 0)}
-          >
-            ▶
-          </button>
+          {selectedProject.images.length > 1 && (
+            <button 
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full shadow-md hover:bg-gray-700"
+              onClick={() => setSelectedImageIndex(prev => prev < selectedProject.images.length - 1 ? prev + 1 : 0)}
+            >
+              ▶
+            </button>
+          )}
         </div>
 
         {/* Project Title */}
-        <h3 className="text-4xl font-extrabold text-white mt-6 text-center">
+        <h3 className="text-2xl sm:text-4xl font-extrabold text-white mt-4 text-center">
           {selectedProject.title}
         </h3>
 
-        {/* Project Description */}
-        <p className="text-lg text-gray-300 mt-4 text-center">
-          {selectedProject.details}
-        </p>
-        {/* Project Details with Line Breaks */}
-<div className="text-lg text-gray-300 mt-4 text-center">
-  {selectedProject.details.split("\n\n").map((paragraph, index) => (
-    <p key={index} className="mb-4">{paragraph}</p>
-  ))}
-</div>
+        {/* Project Details */}
+        <div className="text-lg text-gray-300 mt-4 text-center">
+          {selectedProject.details.split("\n\n").map((paragraph, index) => (
+            <p key={index} className="mb-4">{paragraph}</p>
+          ))}
+        </div>
 
         {/* Technologies Used */}
         <div className="flex flex-wrap justify-center mt-6">
@@ -299,6 +315,7 @@ export default function Projects() {
     </motion.div>
   )}
 </AnimatePresence>
+
 
     </section>
   );
