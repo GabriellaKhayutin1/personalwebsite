@@ -31,7 +31,7 @@ const projects = [
     loading: true,  // 🚀 This project is still in progress
     details: "IdeaPolish.ai is an AI-driven tool that helps entrepreneurs refine and enhance their startup ideas. The platform provides structured feedback based on industry trends, competitive analysis, and best startup practices.\n\nKey Features:\n✅ AI-Powered Insights – Generates suggestions for business improvement\n✅ Competitive Analysis – Compares ideas with existing market trends\n✅ User Authentication & Dashboard – Allows users to save their analyses",
     tech: ["React", "OpenAI API", "Tailwind", "JavaScript", "Node.js"],
-    images: ["/ideapolish.jpg", "/ideapolish2.jpg"],
+    images: ["/ideapolish.jpg", "/ai.png"],
     repo: "https://github.com/GabriellaKhayutin1/IdeaPolish.ai",
   },
 
@@ -50,7 +50,7 @@ const projects = [
     date: "2024",
     details: "A React-based interactive slideshow that fetches and displays NASA’s Astronomy Picture of the Day (APOD) using NASA’s public API. It provides beautiful space images with detailed explanations.\n\nKey Features:\n✅ Daily Astronomy Picture Updates\n✅ Interactive Slideshow with smooth animations\n✅ Dark Mode Support",
     tech: ["JavaScript", "Laravel", "NASA API", "Tailwind"],
-    images: ["/nasa1page.png", "/nasa2.png"],
+    images: [ "/nasa1.png","/nasa2.png","/nasa3.png","/nasa4.png"],
     repo: "https://github.com/GabriellaKhayutin1/NasaApi",
   },
   {
@@ -59,7 +59,7 @@ const projects = [
     date: "2024",
     details: "A high-performance security company website built for Global Security Advising Homeland Solutions. It provides detailed security service offerings with a modern and reliable design.\n\nKey Features:\n✅ Professional & Secure Design\n✅ Responsive Layout for All Devices\n✅ Fast & Optimized Performance",
     tech: ["Laravel", "Tailwind", "PHP", "MySQL", "JavaScript", "HTML", "CSS", "Node.js"],
-    images: ["/security.png", "/security2.png"],
+    images: ["/security.png"],
     repo: "https://github.com/NikolAlexandrova/security",
   },
   {
@@ -68,7 +68,7 @@ const projects = [
     date: "2024",
     details: "I developed a data processing tool for JRCZ to streamline their neighborhood mapping workflow. The tool allows users to upload a GeoPackage file, which is then converted into JSON format, and visualize geospatial data efficiently.\n\nKey Features:\n✅ Uploads GeoPackage files & extracts data\n✅ Displays interactive map with locations\n✅ Instant retrieval of coordinates, IDs, and names",
     tech: ["HTML", "MySQL", "Laravel", "JavaScript", "Tailwind"],
-    images: ["/JRCZ.png", "/JRCZ2.png"],
+    images: ["/JRCZ.png"],
     repo: "https://github.com/GabriellaKhayutin1/spicyspinach09",
   },
   {
@@ -77,7 +77,7 @@ const projects = [
     date: "2023",
     details: "Tetra is a fun and engaging educational game designed to teach kids problem-solving skills. Developed as a team project, it involved game design, coding, and user experience testing.\n\nKey Features:\n✅ Engaging Storyline & Challenges\n✅ Kid-Friendly UI & Animations",
     tech: ["JavaScript", "HTML5", "CSS", "TypeScript"],
-    images: ["/tetra.jpeg", "/tetra2.jpeg"],
+    images: ["/tetra.jpeg","/tetra.png", "/tetragame.png", "/tetrakids.jpeg"],
     repo: "https://github.com/Te7ra/tetrasAdventure",
   },
 ];
