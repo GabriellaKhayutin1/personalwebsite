@@ -73,7 +73,7 @@ const projects = [
     description: "A website in which a user can store their ingredients and get reminders for expired ingredients.",
     date: "2025",
     loading: true,  // 🚀 This project is still in progress
-    details: "Smart Storage is a full-stack web app that helps users track their pantry ingredients, receive expiration notifications, and efficiently manage grocery shopping. It ensures users never waste food by automatically reminding them of expiring items.\n\nKey Features:\n✅ Ingredient Tracking – Users can add, edit, and remove pantry items\n✅ Expiration Alerts – Sends reminders for items that are about to expire\n✅ AI-Powered Recipe Suggestions – Uses AI to suggest recipes based on ingredients\n✅ Grocery List Generator – Helps users create a smart shopping list",
+    details: "Smart Storage is a full-stack web app that helps users track their pantry ingredients, receive expiration notifications, and efficiently manage grocery shopping. It ensures users never waste food by automatically reminding them of expiring items.\n\nKey Features:\n✅ Ingredient Tracking – Users can add, edit, and remove pantry items\n✅ Expiration Alerts – Sends reminders for items that are about to expire\n✅ Grocery List Generator – Helps users create a smart shopping list",
     tech: ["JavaScript", "OpenAI API", "Tailwind", "MongoDB", "Node.js", "Html", "CSS"],
     images: ["/smartstorage.png", "/smartstorage1.png", "/smartstorage2.png", "/smartstorage3.png"],
     repo: "https://github.com/GabriellaKhayutin1/IdeaPolish.ai",
