@@ -127,6 +127,7 @@ export default function Projects() {
       >
         My Projects Timeline
       </motion.h2>
+      
 
       {/* Timeline Container */}
 <div className="relative max-w-6xl mx-auto z-10">
@@ -150,19 +151,26 @@ export default function Projects() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
       >
-        {/* Date Positioned Next to the Timeline Dot */}
-        <div
-          className={`absolute top-1/2 transform -translate-y-1/2 text-gray-300 text-lg font-semibold whitespace-nowrap ${
-            index % 2 === 0 ? "left-[-90px]" : "right-[-90px]"
-          }`}
-        >
-          {project.date}
-        </div>
+{/* Date Positioned Directly Next to the Dot */}
+<div
+  className={`absolute text-gray-300 text-lg font-semibold whitespace-nowrap
+    top-[-30px] left-1/2 -translate-x-1/2 
+    md:top-1/2 md:-translate-y-1/2 md:left-auto md:translate-x-0
+    ${index % 2 === 0 
+      ? "md:left-[-95px] md:text-right"  /* Left-side projects → Dates move slightly left */
+      : "md:right-[-95px] md:text-left"}  /* Right-side projects → Dates move slightly right */
+  `}
+>
+  {project.date}
+</div>
 
-        {/* Timeline Dot */}
-<div className={`absolute top-1/2 transform -translate-y-1/2 w-5 h-5 bg-blue-500 rounded-full shadow-lg ${
+
+
+{/* Timeline Dot - Visible only on Desktop */}
+<div className={`absolute top-1/2 transform -translate-y-1/2 w-5 h-5 bg-blue-500 rounded-full shadow-lg hidden md:block ${
   index % 2 === 0 ? "-left-10" : "-right-10"
 }`}></div>
+
 
 {/* Loading Animation (if project is in progress) */}
 {project.loading && (
