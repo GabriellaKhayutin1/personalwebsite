@@ -14,6 +14,7 @@ const generateStars = (count) => {
 
 const projects = [
   {
+    
     title: "Tetra’s Adventure",
     description: "An interactive educational game for kids.",
     date: "2023",
