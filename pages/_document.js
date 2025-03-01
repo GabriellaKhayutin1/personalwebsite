@@ -5,6 +5,7 @@ export default function Document() {
     <Html lang="en">
       <Head />
       <body className="antialiased">
+      <link rel="icon" href="/GK.png" type="image/png" />
         <Main />
         <NextScript />
       </body>
