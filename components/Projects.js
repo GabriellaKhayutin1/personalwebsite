@@ -157,7 +157,7 @@ export default function Projects() {
     top-[-30px] left-1/2 -translate-x-1/2 
     md:top-1/2 md:-translate-y-1/2 md:left-auto md:translate-x-0
     ${index % 2 === 0 
-      ? "md:left-[-99px] md:text-right"  /* Left projects - move date left */
+      ? "md:left-[-105px] md:text-right"  /* Left projects - move date left */
       : "md:right-[-95px] md:text-left"}  /* Right projects - move date right */
   `}
 >
