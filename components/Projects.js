@@ -39,7 +39,7 @@ const projects = [
     details: "A high-performance security company website built for Global Security Advising Homeland Solutions. It provides detailed security service offerings with a modern and reliable design.\n\nKey Features:\n✅ Professional & Secure Design\n✅ Responsive Layout for All Devices\n✅ Fast & Optimized Performance",
     tech: ["Laravel", "Tailwind", "PHP", "MySQL", "JavaScript", "HTML", "CSS", "Node.js"],
     images: ["/security.png"],
-    repo: "https://github.com/NikolAlexandrova/security",
+    website: "https://globalsecurityadvising.com",
   },
   {
     title: "NASA APOD Slideshow",
@@ -157,8 +157,8 @@ export default function Projects() {
     top-[-30px] left-1/2 -translate-x-1/2 
     md:top-1/2 md:-translate-y-1/2 md:left-auto md:translate-x-0
     ${index % 2 === 0 
-      ? "md:left-[-105px] md:text-right"  /* Left projects - move date left */
-      : "md:right-[-95px] md:text-left"}  /* Right projects - move date right */
+      ? "md:left-[-120px] md:text-right"  /* Left projects - move date left */
+      : "md:right-[-120px] md:text-left"}  /* Right projects - move date right */
   `}
 >
   {project.date}
@@ -304,21 +304,40 @@ export default function Projects() {
           ))}
         </div>
 
-        {/* GitHub Button */}
-        <div className="mt-8 flex justify-center">
-          <a 
-            href={selectedProject.repo} 
-            target="_blank" 
-            rel="noopener noreferrer"
-          >
-            <motion.button 
-              className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full font-semibold shadow-lg hover:from-purple-500 hover:to-blue-500 transition duration-300"
-              whileHover={{ scale: 1.1 }}
-            >
-              🌐 View on GitHub
-            </motion.button>
-          </a>
-        </div>
+        {/* GitHub Button - Only show if repo exists */}
+{selectedProject.repo && (
+  <div className="mt-8 flex justify-center">
+    <a 
+      href={selectedProject.repo} 
+      target="_blank" 
+      rel="noopener noreferrer"
+    >
+      <motion.button 
+        className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full font-semibold shadow-lg hover:from-purple-500 hover:to-blue-500 transition duration-300"
+        whileHover={{ scale: 1.1 }}
+      >
+        🌐 View on GitHub
+      </motion.button>
+    </a>
+  </div>
+)}
+        {selectedProject.website && (
+          <div className="mt-8 flex justify-center">
+  <a 
+    href={selectedProject.website} 
+    target="_blank" 
+    rel="noopener noreferrer"
+  >
+    <motion.button 
+      className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full font-semibold shadow-lg hover:from-purple-500 hover:to-blue-500 transition duration-300 flex items-center gap-2"
+      whileHover={{ scale: 1.1 }}
+    >
+      🌐 View Live <span>🔗</span>
+    </motion.button>
+  </a>
+</div>
+)}
+
       </motion.div>
     </motion.div>
   )}
