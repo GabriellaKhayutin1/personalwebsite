@@ -154,8 +154,10 @@ export default function Navbar() {
               {activeSection === item.section && (
                 <motion.span
                   className="absolute left-1/2 -translate-x-1/2 bottom-0 h-2 w-2 rounded-full bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 shadow-md"
-                  layoutId="activeSectionDot"
-                  transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                  initial={{ opacity: 0, scale: 0.7 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.7 }}
+                  transition={{ duration: 0.25 }}
                 />
               )}
             </motion.a>
