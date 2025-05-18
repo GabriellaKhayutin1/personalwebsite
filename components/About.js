@@ -192,7 +192,7 @@ export default function About() {
           >
             <h3 className="text-xl font-medium text-white">Bachelor's in Information & Communication Technology</h3>
             <p className="text-blue-400 font-medium mt-1">HZ University of Applied Sciences</p>
-            <p className="text-sm text-gray-400 mt-1">2021 - Present</p>
+            <p className="text-sm text-gray-400 mt-1">2023 - Present</p>
             <p className="text-gray-300 mt-2">Focus on software engineering, web development, and data analysis. Participated in multiple project-based learning experiences with real clients.</p>
           </motion.div>
           
