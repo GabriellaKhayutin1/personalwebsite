@@ -14,8 +14,7 @@ const generateStars = (count) => {
 
 const projects = [
   {
-
-    title: "Tetra’s Adventure",
+    title: "Tetra's Adventure",
     description: "An interactive educational game for kids.",
     date: "2023",
     details: "Tetra is a fun and engaging educational game designed to teach kids problem-solving skills. Developed as a team project, it involved game design, coding, and user experience testing.\n\nKey Features:\n✅ Engaging Storyline & Challenges\n✅ Kid-Friendly UI & Animations",
@@ -45,7 +44,7 @@ const projects = [
     title: "NASA APOD Slideshow",
     description: "A website displaying NASA's latest Astronomy Picture of the Day as a slideshow.",
     date: "2024",
-    details: "A React-based interactive slideshow that fetches and displays NASA’s Astronomy Picture of the Day (APOD) using NASA’s public API. It provides beautiful space images with detailed explanations.\n\nKey Features:\n✅ Daily Astronomy Picture Updates\n✅ Interactive Slideshow with smooth animations\n✅ Dark Mode Support",
+    details: "A React-based interactive slideshow that fetches and displays NASA's Astronomy Picture of the Day (APOD) using NASA's public API. It provides beautiful space images with detailed explanations.\n\nKey Features:\n✅ Daily Astronomy Picture Updates\n✅ Interactive Slideshow with smooth animations\n✅ Dark Mode Support",
     tech: ["JavaScript", "Laravel", "NASA API", "Tailwind"],
     images: [ "/nasa1.png","/nasa2.png","/nasa3.png","/nasa4.png"],
     repo: "https://github.com/GabriellaKhayutin1/NasaApi",
@@ -73,25 +72,40 @@ const projects = [
     title: "Smart Storage",
     description: "A website in which a user can store their ingredients and get reminders for expired ingredients.",
     date: "2025",
-    loading: true,  // 🚀 This project is still in progress
-    details: "Smart Storage is a full-stack web app that helps users track their pantry ingredients, receive expiration notifications, and efficiently manage grocery shopping. It ensures users never waste food by automatically reminding them of expiring items.\n\nKey Features:\n✅ Ingredient Tracking – Users can add, edit, and remove pantry items\n✅ Expiration Alerts – Sends reminders for items that are about to expire\n✅ Grocery List Generator – Helps users create a smart shopping list",
-    tech: ["JavaScript", "OpenAI API", "Tailwind", "MongoDB", "Node.js", "Html", "CSS"],
-    images: ["/smartstorage.png", "/smartstorage1.png", "/smartstorage2.png", "/smartstorage3.png"],
-    repo: "https://github.com/GabriellaKhayutin1/IdeaPolish.ai",
+    loading: false,  // 🚀 This project is still in progress
+    details: "SmartStorage is a full-stack web application designed to combat food waste through smart pantry management and eco-awareness. The platform empowers users to track their food inventory, reduce CO₂ emissions, and build sustainable habits—all through an intuitive, automation-driven interface.\n\nKey Features:\n\n✅ Real-Time CO₂ Savings Dashboard - Visualizes users' environmental impact by calculating saved CO₂ based on consumption choices.\n\n✅ Pantry Inventory Management - Enables users to track food items, receive expiration alerts, and reduce waste.\n\n✅ Interactive Scheduling with Google Calendar - Automatically generates reminders for item usage and restocking tied to expiry dates.\n\n✅ Subscription System with Secure Payments - Includes a free trial and a €5/month subscription model with seamless, secure payment integration.\n\n✅ Smart Chatbot Assistant - Offers real-time help, pantry tips, and eco-advice directly within the app.\n\n✅ Leaderboard & Gamification - Motivates users by ranking CO₂ savings and rewarding sustainable behavior.\n\n✅ Tips Page - Provides educational content, recipes, and sustainability hacks tailored to pantry items.",
+    tech: ["JavaScript", "Mollie API", "Google Calendar API","Render", "Tailwind", "MongoDB Atlas", "Express.js","Node.js", "Html", "CSS"],
+    images: ["/smartstorage.png", "/smartstorage1.png", "/smartspantry.png", "/smartshome.png", "/smartshome1.png", "smartsgogle.png","/smartsprofile.png", "/smartsco2chart.png", "/smartsleadearboard.png", "/smartstips.png", ],
+    repo: "https://github.com/GabriellaKhayutin1/smartstorage",
   },
+  {
+    title: "IT Conference Website (2025 Edition)",
+    description: "Redesigning the official IT conference website to reflect the 2025 theme: Energy & Water.",
+    date: "2025",
+    loading: true,  // 🚀 This project is still in progress
+    details: "I’m currently rebuilding the university’s IT conference website for its 2025 edition. The focus is on transforming the older version into a more modern and interactive platform that reflects this year’s theme: *Energy & Water – Discover your spark in the digital wave*. The site is being redesigned from the ground up with improved structure, new visual components, and a cleaner layout to better support event details and sponsor visibility.\n\nKey Features (in progress):\n✅ Full redesign aligned with the 2025 Energy & Water theme\n✅ Updated sections for program, speakers, and sponsors\n✅ Countdown timer and smooth animations for engagement",
+    tech: ["Tailwind CSS", "JavaScript", "HTML", "Framer Motion"],
+    images: ["/itconference.png", "/itlogo.png"],  // Swap with latest when ready
+    repo: "https://github.com/GabriellaKhayutin1/it-conference-website"  // Update if needed
+  },  
 ];
 
-
-
+const serviceId = 'service_xmo69nn';
+const templateId = 'template_iomempx';
+const publicKey = '71QrzDW819GHth889';
 
 export default function Projects() {
   const [stars, setStars] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0); // Slideshow index
+  const [filter, setFilter] = useState('all'); // For filtering projects
 
   useEffect(() => {
     setStars(generateStars(100));
   }, []);
+
+  // Filter projects based on technology
+  const filteredProjects = projects;
 
   return (
     <section id="projects" className="relative py-16 bg-black text-white overflow-hidden">
@@ -119,225 +133,255 @@ export default function Projects() {
         ))}
       </div>
 
-      {/* Timeline Title */}
-      <motion.h2
-        className="text-5xl font-extrabold text-center mb-12 tracking-wide text-gray-200 relative z-10"
+      {/* Background Gradient Elements */}
+      <div className="absolute w-[600px] h-[600px] bg-blue-500 rounded-full blur-[120px] opacity-10 -top-20 -left-40"></div>
+      <div className="absolute w-[500px] h-[500px] bg-purple-500 rounded-full blur-[120px] opacity-10 bottom-20 right-10"></div>
+
+      {/* Section Title with Animation */}
+      <motion.div
+        className="text-center mb-12 relative z-10"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        My Projects Timeline
-      </motion.h2>
-      
+        <h2 className="text-6xl font-extrabold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
+          My Projects
+        </h2>
+        <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mt-4 rounded-full"></div>
+        <p className="text-grey-400 mt-4 max-w-2xl mx-auto">Explore my latest work and projects that showcase my skills and expertise</p>
+      </motion.div>
 
-      {/* Timeline Container */}
-<div className="relative max-w-6xl mx-auto z-10">
-  {/* Center Line */}
-  <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gray-700 rounded"></div>
+      {/* Only show All Projects, no filter buttons */}
+      <div className="flex justify-center mb-10 relative z-10">
+        <span className="px-6 py-2 rounded-full text-base font-semibold bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg">All Projects</span>
+      </div>
 
-  {/* Timeline Items */}
-  <motion.div className="flex flex-col items-center gap-12 px-6">
-    {projects.map((project, index) => (
-      <motion.div
-        key={index}
-        className={`relative w-full max-w-[600px] ${
-          index % 2 === 0 ? "ml-auto" : "mr-auto"
-        }`}
-        whileHover={{
-          scale: 1.03,
-          boxShadow: "0px 10px 40px rgba(0, 255, 255, 0.2)",
-        }}
-        transition={{ type: "spring", stiffness: 200, damping: 12 }}
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-      >
-<div
-  className={`absolute text-gray-300 text-lg font-semibold whitespace-nowrap
-    top-[-30px] left-1/2 -translate-x-1/2 
-    md:top-1/2 md:-translate-y-1/2 md:left-auto md:translate-x-0
-    ${index % 2 === 0 
-      ? "md:left-[-120px] md:text-right"  /* Left projects - move date left */
-      : "md:right-[-120px] md:text-left"}  /* Right projects - move date right */
-  `}
->
-  {project.date}
-</div>
+      {/* Modern Grid Layout */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto px-4 relative z-10">
+        {filteredProjects.map((project, index) => (
+          <motion.div
+            key={index}
+            className="bg-gray-900/60 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-800 h-full flex flex-col group"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            viewport={{ once: true, amount: 0.2 }}
+            whileHover={{ y: -5, boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' }}
+          >
+            {/* Project Image with Overlay */}
+            <div className="relative overflow-hidden h-48">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+              {project.loading ? (
+                <div className="w-full h-full flex items-center justify-center bg-gray-800 animate-pulse">
+                  <span className="text-gray-300">🚧 Work in Progress...</span>
+                </div>
+              ) : (
+                <img
+                  src={project.images[0]}
+                  alt={project.title}
+                  className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700"
+                />
+              )}
+              
+              {/* Date Badge */}
+              <div className="absolute top-3 right-3 bg-black/70 backdrop-blur-sm text-white text-xs font-medium px-3 py-1 rounded-full border border-gray-700 z-20">
+                {project.date}
+              </div>
+            </div>
+            
+            {/* Content */}
+            <div className="p-5 flex-grow flex flex-col">
+              <h3 className="text-xl font-bold text-white mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-500 transition-all duration-300">
+                {project.title}
+              </h3>
+              <p className="text-gray-400 text-sm mb-4 flex-grow">{project.description}</p>
+              
+              {/* Tech Stack Pills */}
+              <div className="flex flex-wrap gap-1 mb-4">
+                {project.tech.slice(0, 3).map((tech, idx) => (
+                  <span key={idx} className="text-xs bg-gray-800 text-gray-300 px-2 py-1 rounded-md">
+                    {tech}
+                  </span>
+                ))}
+                {project.tech.length > 3 && (
+                  <span className="text-xs bg-gray-800 text-gray-300 px-2 py-1 rounded-md">
+                    +{project.tech.length - 3}
+                  </span>
+                )}
+              </div>
+              
+              {/* Call to Action Button */}
+              <motion.button
+                className="w-full py-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium rounded-lg transition duration-300 mt-auto"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => {
+                  setSelectedProject(project);
+                  setSelectedImageIndex(0);
+                }}
+              >
+                View Project
+              </motion.button>
+            </div>
+          </motion.div>
+        ))}
+      </div>
 
-
-
-
-{/* Timeline Dot - Visible only on Desktop */}
-<div className={`absolute top-1/2 transform -translate-y-1/2 w-5 h-5 bg-blue-500 rounded-full shadow-lg hidden md:block ${
-  index % 2 === 0 ? "-left-10" : "-right-10"
-}`}></div>
-
-
-{/* Loading Animation (if project is in progress) */}
-{project.loading && (
-  <div className="absolute top-1/2 transform -translate-y-1/2 left-6 flex items-center space-x-2">
-    <div className="w-3 h-3 bg-yellow-400 rounded-full animate-ping"></div>
-    <span className="text-yellow-400 text-sm">🚧 In Progress...</span>
-  </div>
-)}
-
-{/* Project Card */}
-<div className="relative bg-gray-900 rounded-xl p-6 shadow-lg flex flex-col">
-  <h3 className="text-xl font-bold text-white">{project.title}</h3>
-
-  {/* Centered Image or Loading Animation */}
-  <div className="w-full flex justify-center">
-    {project.loading ? (
-    <div className="w-full h-32 flex items-center justify-center bg-gray-800 rounded-lg animate-pulse">
-    <span className="text-gray-300">🚧 Work in Progress...</span>
-  </div>
-  
-    ) : (
-      <motion.img
-        src={project.images[0]}
-        alt={project.title}
-        className="w-full h-44 object-contain rounded-lg my-4"
-        initial={{ opacity: 0, scale: 0.9 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-      />
-    )}
-  </div>
-  <p className="text-sm text-gray-400 mt-4">{project.description}</p>
-  <div className="mt-4 flex justify-center">
-    <motion.button
-      className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-purple-500 hover:to-blue-500 text-white font-semibold py-2 px-4 rounded-full transition duration-300 text-sm shadow-md hover:shadow-lg"
-      whileHover={{ scale: 1.1 }}
-      onClick={() => {
-        setSelectedProject(project);
-        setSelectedImageIndex(0); // Reset image index when opening
-      }}
-    >
-      View More
-    </motion.button>
-  </div>
-</div>
-</motion.div>
-))}
-</motion.div>
-</div>
-
-
+{/* Project Modal - Enhanced Version */}
 <AnimatePresence>
   {selectedProject && (
     <motion.div
-      className="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-lg flex justify-center items-center z-50 px-4"
+      className="fixed inset-0 bg-black/90 backdrop-blur-xl flex justify-center items-center z-50 px-4 overflow-y-auto py-8"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) setSelectedProject(null);
+      }}
     >
       <motion.div
-        className="bg-gray-900 rounded-2xl p-6 sm:p-8 max-w-3xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl border border-gray-700"
+        className="bg-gray-900/80 backdrop-blur-md rounded-2xl border border-gray-700/50 p-6 sm:p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto relative shadow-[0_0_50px_rgba(79,70,229,0.15)]"
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.8, opacity: 0 }}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        onClick={(e) => e.stopPropagation()}
       >
-      {/* Close Button - Always Accessible */}
-<button 
-  className="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-400 hover:text-gray-200 text-2xl sm:text-3xl bg-gray-800 p-2 rounded-full z-50"
-  onClick={() => setSelectedProject(null)}
->
-  ✖
-</button>
+        {/* Close Button */}
+        <button 
+          className="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-400 hover:text-white z-50 bg-gray-800/80 hover:bg-gray-700 p-2 rounded-full transition-colors duration-200"
+          onClick={() => setSelectedProject(null)}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
 
+        {/* Project Title */}
+        <h3 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 mb-2">
+          {selectedProject.title}
+        </h3>
+        
+        {/* Project Date */}
+        <div className="inline-block bg-gray-800 text-gray-300 text-sm px-3 py-1 rounded-full mb-6">
+          {selectedProject.date}
+        </div>
 
-        {/* Image Gallery */}
-        <div className="relative w-full flex justify-center">
+        {/* Image Gallery with Indicators */}
+        <div className="relative w-full mb-6 rounded-xl overflow-hidden bg-black/40 aspect-video">
           <motion.img 
             src={selectedProject.images[selectedImageIndex]} 
             alt={selectedProject.title} 
-            className="w-full max-h-[300px] object-contain rounded-lg shadow-lg"
+            className="w-full h-full object-contain"
             key={selectedImageIndex}
-            initial={{ opacity: 0.7, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
           />
 
-          {/* Left Arrow */}
+          {/* Image Navigation */}
           {selectedProject.images.length > 1 && (
-            <button 
-              className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full shadow-md hover:bg-gray-700"
-              onClick={() => setSelectedImageIndex(prev => prev > 0 ? prev - 1 : selectedProject.images.length - 1)}
-            >
-              ◀
-            </button>
-          )}
+            <>
+              {/* Left Arrow */}
+              <button 
+                className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full shadow-lg transition-colors duration-200"
+                onClick={() => setSelectedImageIndex(prev => prev > 0 ? prev - 1 : selectedProject.images.length - 1)}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
 
-          {/* Right Arrow */}
-          {selectedProject.images.length > 1 && (
-            <button 
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full shadow-md hover:bg-gray-700"
-              onClick={() => setSelectedImageIndex(prev => prev < selectedProject.images.length - 1 ? prev + 1 : 0)}
-            >
-              ▶
-            </button>
+              {/* Right Arrow */}
+              <button 
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full shadow-lg transition-colors duration-200"
+                onClick={() => setSelectedImageIndex(prev => prev < selectedProject.images.length - 1 ? prev + 1 : 0)}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+
+              {/* Image Indicators */}
+              <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
+                {selectedProject.images.map((_, idx) => (
+                  <button 
+                    key={idx} 
+                    className={`w-2 h-2 rounded-full transition-all ${selectedImageIndex === idx ? 'bg-white w-4' : 'bg-gray-400/50'}`}
+                    onClick={() => setSelectedImageIndex(idx)}
+                  />
+                ))}
+              </div>
+            </>
           )}
         </div>
 
-        {/* Project Title */}
-        <h3 className="text-2xl sm:text-4xl font-extrabold text-white mt-4 text-center">
-          {selectedProject.title}
-        </h3>
-
         {/* Project Details */}
-        <div className="text-lg text-gray-300 mt-4 text-center">
+        <div className="prose prose-invert max-w-none">
           {selectedProject.details.split("\n\n").map((paragraph, index) => (
-            <p key={index} className="mb-4">{paragraph}</p>
+            <p key={index} className="text-gray-300 mb-4">
+              {paragraph}
+            </p>
           ))}
         </div>
 
         {/* Technologies Used */}
-        <div className="flex flex-wrap justify-center mt-6">
-          {selectedProject.tech.map((tech, index) => (
-            <span 
-              key={index} 
-              className="bg-gradient-to-r from-blue-500 to-purple-500 text-white text-sm font-semibold px-3 py-1 rounded-full mx-1 mt-2 shadow-md"
-            >
-              {tech}
-            </span>
-          ))}
+        <div className="mt-6">
+          <h4 className="text-white text-lg font-semibold mb-3">Technologies</h4>
+          <div className="flex flex-wrap gap-2">
+            {selectedProject.tech.map((tech, index) => (
+              <span 
+                key={index} 
+                className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/30 text-white text-sm font-medium px-3 py-1.5 rounded-md"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
         </div>
 
-        {/* GitHub Button - Only show if repo exists */}
-{selectedProject.repo && (
-  <div className="mt-8 flex justify-center">
-    <a 
-      href={selectedProject.repo} 
-      target="_blank" 
-      rel="noopener noreferrer"
-    >
-      <motion.button 
-        className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full font-semibold shadow-lg hover:from-purple-500 hover:to-blue-500 transition duration-300"
-        whileHover={{ scale: 1.1 }}
-      >
-        🌐 View on GitHub
-      </motion.button>
-    </a>
-  </div>
-)}
-        {selectedProject.website && (
-          <div className="mt-8 flex justify-center">
-  <a 
-    href={selectedProject.website} 
-    target="_blank" 
-    rel="noopener noreferrer"
-  >
-    <motion.button 
-      className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full font-semibold shadow-lg hover:from-purple-500 hover:to-blue-500 transition duration-300 flex items-center gap-2"
-      whileHover={{ scale: 1.1 }}
-    >
-      🌐 View Live <span>🔗</span>
-    </motion.button>
-  </a>
-</div>
-)}
-
+        {/* Action Buttons */}
+        <div className="mt-8 flex flex-wrap gap-4 justify-center">
+          {selectedProject.repo && (
+            <a 
+              href={selectedProject.repo} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex-1 min-w-[200px]"
+            >
+              <motion.button 
+                className="w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium rounded-lg flex items-center justify-center gap-2 transition duration-300"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                GitHub Repository
+              </motion.button>
+            </a>
+          )}
+          
+          {selectedProject.website && (
+            <a 
+              href={selectedProject.website} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex-1 min-w-[200px]"
+            >
+              <motion.button 
+                className="w-full py-3 bg-white text-gray-900 font-medium rounded-lg flex items-center justify-center gap-2 transition duration-300 border border-transparent hover:bg-transparent hover:text-white hover:border-white"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+                View Live Website
+              </motion.button>
+            </a>
+          )}
+        </div>
       </motion.div>
     </motion.div>
   )}
