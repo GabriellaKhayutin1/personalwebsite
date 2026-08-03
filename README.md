@@ -42,8 +42,13 @@ It includes information about my software engineering journey, selected technica
 
 ## Run locally
 
-Clone the repository:
+Clone the repository and install the dependencies:
 
 ```bash
 git clone https://github.com/GabriellaKhayutin1/personalwebsite.git
 cd personalwebsite
+npm install
+npm run dev
+```
+
+Then open [http://localhost:3000](http://localhost:3000) in your browser.
