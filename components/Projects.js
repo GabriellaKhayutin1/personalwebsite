@@ -1,406 +1,711 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-
-// Function to generate stars
-const generateStars = (count) => {
-  return Array.from({ length: count }).map(() => ({
-    id: Math.random().toString(36).substr(2, 9),
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 2 + 1,
-    delay: Math.random() * 5,
-  }));
-};
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  FiArrowUpRight,
+  FiChevronLeft,
+  FiChevronRight,
+  FiCheckCircle,
+  FiExternalLink,
+  FiGithub,
+  FiGlobe,
+  FiImage,
+  FiMic,
+  FiStar,
+  FiX,
+} from "react-icons/fi";
 
 const projects = [
   {
-    title: "Tetra's Adventure",
-    description: "An interactive educational game for kids.",
-    date: "2023",
-    details: "Tetra is a fun and engaging educational game designed to teach kids problem-solving skills. Developed as a team project, it involved game design, coding, and user experience testing.\n\nKey Features:\n✅ Engaging Storyline & Challenges\n✅ Kid-Friendly UI & Animations",
-    tech: ["JavaScript", "HTML5", "CSS", "TypeScript"],
-    images: ["/tetra.jpeg","/tetra.png", "/tetragame.png", "/tetrakids.jpeg"],
-    repo: "https://github.com/Te7ra/tetrasAdventure",
+    title: "AI-Powered VR Training Platform",
+    contextLabel: "Software Engineering Internship · Backend & AI",
+    description:
+      "A speech-to-text and AI-feedback prototype developed for an AI-powered virtual-patient training platform used by nursing students.",
+    overview:
+      "A speech-to-text and AI-feedback prototype developed for an AI-powered virtual-patient training platform used by nursing students.",
+    whatBuilt:
+      "Engineered and benchmarked a Dockerised Python speech-to-text backend prototype designed for near-real-time Dutch transcription and integration with the platform’s AI feedback workflow.",
+    outcomesHeading: "Key Outcomes",
+    keyFunctionality: [
+      "Reduced backend transcription latency by approximately 65%, from 4.0 seconds to 1.2–1.5 seconds",
+      "Evaluated five speech-recognition solutions to identify a suitable approach for near-real-time Dutch transcription",
+      "Validated the selected prototype through ten automated tests and user sessions with three nursing students",
+      "Expanded the AI feedback generator with five communication indicators",
+    ],
+    tech: ["Python", "FastAPI", "WebSockets", "WhisperLive", "faster-whisper", "Docker"],
+    visual: "jrcz",
+    accent: "purple",
+    links: [],
   },
   {
-    title: "JRCZ Data Science Project",
-    description: "A data processing tool for neighborhood location mapping.",
-    date: "2024",
-    details: "I developed a data processing tool for JRCZ to streamline their neighborhood mapping workflow. The tool allows users to upload a GeoPackage file, which is then converted into JSON format, and visualize geospatial data efficiently.\n\nKey Features:\n✅ Uploads GeoPackage files & extracts data\n✅ Displays interactive map with locations\n✅ Instant retrieval of coordinates, IDs, and names",
-    tech: ["HTML", "MySQL", "Laravel", "JavaScript", "Tailwind"],
-    images: ["/JRCZ.png"],
-    repo: "https://github.com/GabriellaKhayutin1/spicyspinach09",
-  },
-  {
-    title: "Security Website",
-    description: "A professional security company website.",
-    date: "2024",
-    details: "A high-performance security company website built for Global Security Advising Homeland Solutions. It provides detailed security service offerings with a modern and reliable design.\n\nKey Features:\n✅ Professional & Secure Design\n✅ Responsive Layout for All Devices\n✅ Fast & Optimized Performance",
-    tech: ["Laravel", "Tailwind", "PHP", "MySQL", "JavaScript", "HTML", "CSS", "Node.js"],
-    images: ["/security.png"],
-    website: "https://globalsecurityadvising.com",
-  },
-  {
-    title: "Junker App",
-    description: "An eco-conscious exchange platform.",
-    date: "2024",
-    details: "Junker is a sustainable exchange platform designed to encourage young adults to adopt eco-friendly consumer behaviors. The app allows users to swap and trade second-hand items, reducing waste and promoting sustainability.\n\nKey Features:\n✅ Tinder-style Swiping System – Browse and like items easily\n✅ Secure Trading System – Ensures smooth & safe transactions\n✅ Community-Driven Exchange – Connects users in a sustainable way",
-    tech: ["Next.js", "Tailwind", "Node.js", "Microservices Architecture", "tailwind"],
-    images: ["/junker.png", "/junker1.jpeg"],
-    repo: "https://github.com/orgs/HZ-HBOICT-Y2-2425/teams/team-9-junker/repositories",
-  },
-  
-  {
-    title: "NASA APOD Slideshow",
-    description: "A website displaying NASA's latest Astronomy Picture of the Day as a slideshow.",
-    date: "2024",
-    details: "A React-based interactive slideshow that fetches and displays NASA's Astronomy Picture of the Day (APOD) using NASA's public API. It provides beautiful space images with detailed explanations.\n\nKey Features:\n✅ Daily Astronomy Picture Updates\n✅ Interactive Slideshow with smooth animations\n✅ Dark Mode Support",
-    tech: ["JavaScript", "Laravel", "NASA API", "Tailwind"],
-    images: [ "/nasa1.png","/nasa2.png","/nasa3.png","/nasa4.png"],
-    repo: "https://github.com/GabriellaKhayutin1/NasaApi",
-  },
-  {
-    title: "IdeaPolish.ai",
-    description: "An AI-powered startup idea refiner.",
-    date: "2025",
-    loading: true,  // 🚀 This project is still in progress
-    details: "IdeaPolish.ai is an AI-driven tool that helps entrepreneurs refine and enhance their startup ideas. The platform provides structured feedback based on industry trends, competitive analysis, and best startup practices.\n\nKey Features:\n✅ AI-Powered Insights – Generates suggestions for business improvement\n✅ Competitive Analysis – Compares ideas with existing market trends\n✅ User Authentication & Dashboard – Allows users to save their analyses",
-    tech: ["React", "OpenAI API", "Tailwind", "JavaScript", "Node.js"],
-    images: ["/ideapolish.jpg", "/ai.png"],
-    repo: "https://github.com/GabriellaKhayutin1/IdeaPolish.ai",
+    title: "SolaiMenu",
+    contextLabel: "Full-Stack Product Development",
+    description:
+      "A multilingual AI-powered QR-menu SaaS product that enables restaurants to create, manage and publish menus in ten languages from one dashboard.",
+    overview:
+      "A multilingual AI-powered QR-menu SaaS product that enables restaurants to create, manage and publish menus in ten languages from one dashboard.",
+    whatBuilt:
+      "Developed both the restaurant-facing menu-management experience and the customer-facing QR menu, with workflows for creating, updating and publishing multilingual menu content.",
+    keyFunctionality: [
+      "Menu creation and management from a central dashboard",
+      "Multilingual publishing across ten languages with AI-assisted translations",
+      "Allergen information and AI-assisted food-and-drink recommendations",
+      "Search and filtering, restaurant specials and events, and menu analytics",
+    ],
+    tech: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase", "OpenAI API", "Vercel"],
+    visual: "solaimenu",
+    accent: "blue",
+    links: [],
   },
   {
     title: "Smart Storage",
-    description: "A website in which a user can store their ingredients and get reminders for expired ingredients.",
-    date: "2025",
-    loading: false,  // 🚀 This project is still in progress
-    details: "SmartStorage is a full-stack web application designed to combat food waste through smart pantry management and eco-awareness. The platform empowers users to track their food inventory, reduce CO₂ emissions, and build sustainable habits—all through an intuitive, automation-driven interface.\n\nKey Features:\n\n✅ Real-Time CO₂ Savings Dashboard - Visualizes users' environmental impact by calculating saved CO₂ based on consumption choices.\n\n✅ Pantry Inventory Management - Enables users to track food items, receive expiration alerts, and reduce waste.\n\n✅ Interactive Scheduling with Google Calendar - Automatically generates reminders for item usage and restocking tied to expiry dates.\n\n✅ Subscription System with Secure Payments - Includes a free trial and a €5/month subscription model with seamless, secure payment integration.\n\n✅ Smart Chatbot Assistant - Offers real-time help, pantry tips, and eco-advice directly within the app.\n\n✅ Leaderboard & Gamification - Motivates users by ranking CO₂ savings and rewarding sustainable behavior.\n\n✅ Tips Page - Provides educational content, recipes, and sustainability hacks tailored to pantry items.",
-    tech: ["JavaScript", "Mollie API", "Google Calendar API","Render", "Tailwind", "MongoDB Atlas", "Express.js","Node.js", "Html", "CSS"],
-    images: ["/smartstorage.png", "/smartstorage1.png", "/smartspantry.png", "/smartshome.png", "/smartshome1.png", "smartsgogle.png","/smartsprofile.png", "/smartsco2chart.png", "/smartsleadearboard.png", "/smartstips.png", ],
-    repo: "https://github.com/GabriellaKhayutin1/smartstorage",
+    description:
+      "Smart pantry app with ingredient management, expiry tracking, Google Calendar integration and CO₂-savings analytics.",
+    overview:
+      "A smart pantry and food-management application designed to help users organise ingredients, track expiry dates and better understand the financial and environmental impact of food usage.",
+    whatBuilt:
+      "Developed the full-stack application, including authenticated user accounts, ingredient-management workflows, personalised dashboards and responsive interfaces.",
+    keyFunctionality: [
+      "Ingredient management with expiry-date tracking and reminders",
+      "Google authentication and Google Calendar integration",
+      "Personalised analytics and CO₂-savings calculations based on tracked food usage",
+      "Subscription and payment functionality for premium access",
+    ],
+    tech: ["Node.js", "Express.js", "MongoDB", "JavaScript", "Tailwind CSS"],
+    cardTech: ["Node.js", "Express.js", "MongoDB", "Tailwind CSS"],
+    image: "/smartstorage3.png",
+    images: [
+      "/smartstorage3.png",
+      "/smartshome.png",
+      "/smartsprofile.png",
+      "/smartsco2chart.png",
+      "/smartstips.png",
+      "/smartsgogle.png",
+      "/smartsleadearboard.png",
+      "/smartstorage2.png",
+    ],
+    imageAlt: "Smart Storage pantry management screenshot",
+    accent: "cyan",
+    links: [
+      {
+        label: "Repository",
+        href: "https://github.com/GabriellaKhayutin1/smartstorage",
+        icon: FiGithub,
+      },
+    ],
   },
   {
-    title: "IT Conference Website (2025 Edition)",
-    description: "Redesigning the official IT conference website to reflect the 2025 theme: Energy & Water.",
-    date: "2025",
-    loading: true,  // 🚀 This project is still in progress
-    details: "I'm currently rebuilding the university's IT conference website for its 2025 edition. The focus is on transforming the older version into a more modern and interactive platform that reflects this year's theme: *Energy & Water – Discover your spark in the digital wave*. The site is being redesigned from the ground up with improved structure, new visual components, and a cleaner layout to better support event details and sponsor visibility.\n\nKey Features (in progress):\n✅ Full redesign aligned with the 2025 Energy & Water theme\n✅ Updated sections for program, speakers, and sponsors\n✅ Countdown timer and smooth animations for engagement",
-    tech: ["Tailwind CSS", "JavaScript", "HTML", "Framer Motion"],
-    images: ["/itconference.png", "/itlogo.png"],  // Swap with latest when ready
-    repo: "https://github.com/GabriellaKhayutin1/it-conference-website"  // Update if needed
-  },  
+    title: "JUNKER",
+    contextLabel: "Six-Person Team Project",
+    description:
+      "An eco-conscious item-exchange platform developed in a six-person team to help users give unwanted items a second life.",
+    overview:
+      "An eco-conscious item-exchange platform developed in a six-person team to help users give unwanted items a second life.",
+    whatBuilt:
+      "Developed frontend and backend functionality within the team and contributed to shaping the platform’s user experience.",
+    contributionHeading: "My Contribution",
+    outcomesHeading: "Key Outcomes & Functionality",
+    keyFunctionality: [
+      "Developed the core item-exchange experience",
+      "Contributed across both frontend and backend implementation",
+      "Collaborated within a six-person multidisciplinary development team",
+      "Reached the university’s Dragons’ Den final and placed third",
+    ],
+    tech: ["SvelteKit", "TypeScript", "Tailwind CSS", "Node.js", "Express.js"],
+    image: "/junker.png",
+    images: ["/junker.png", "/junker1.jpeg"],
+    imageAlt: "JUNKER item-exchange platform screenshot",
+    accent: "blue",
+    links: [],
+  },
+  {
+    title: "IT Conference Website",
+    contextLabel: "Team Project · Frontend Developer",
+    description:
+      "Contributed to the public-facing website for the official HZ ICT Conference, translating Figma designs into responsive pages and navigation as part of the website development team.",
+    overview:
+      "Contributed to the public-facing website for the official HZ ICT Conference, translating Figma designs into responsive pages and navigation as part of the website development team.",
+    contributionHeading: "My Contribution",
+    contributionItems: [
+      "Developed the speakers page, FAQ and responsive navigation",
+      "Contributed to the landing and contact pages",
+      "Integrated frontend work from multiple branches into a consistent public-facing experience",
+      "Collaborated within the IT Conference Website Team to deliver the final website",
+    ],
+    tech: ["Laravel", "Blade", "Tailwind CSS", "JavaScript"],
+    image: "/itconference.png",
+    images: ["/itconference.png", "/itlogo.png"],
+    imageAlt: "HZ ICT Conference website landing page screenshot",
+    accent: "purple",
+    links: [
+      {
+        label: "Live Website ↗",
+        href: "https://weareinittogether.nl/",
+        icon: FiGlobe,
+      },
+      {
+        label: "Team Repository ↗",
+        href: "https://github.com/HZ-HBO-ICT/it-conference",
+        icon: FiGithub,
+      },
+    ],
+  },
+  {
+    title: "IdeaPolish.ai",
+    description:
+      "An AI-enabled application that helps users evaluate and refine early-stage ideas through structured, AI-generated analysis.",
+    overview:
+      "An AI-enabled application that helps users evaluate and refine early-stage ideas through structured, AI-generated analysis.",
+    whatBuilt:
+      "Built the backend workflow for submitting an idea, generating a structured analysis with Gemini and storing the results for later review and management.",
+    keyFunctionality: [
+      "Collects the idea, industry, target audience and problem being addressed",
+      "Generates structured AI analysis covering the concept, value proposition, market, strengths, weaknesses and opportunities",
+      "Stores generated analyses in MongoDB for later retrieval",
+      "Supports retrieving, editing and deleting saved analyses",
+    ],
+    tech: ["Node.js", "Express.js", "MongoDB", "Gemini API"],
+    image: "/ai.png",
+    images: ["/ai.png", "/ideapolish.jpg"],
+    imageAlt: "IdeaPolish.ai landing page screenshot",
+    accent: "cyan",
+    links: [],
+  },
 ];
 
-const serviceId = 'service_xmo69nn';
-const templateId = 'template_iomempx';
-const publicKey = '71QrzDW819GHth889';
+const accentStyles = {
+  blue: {
+    border: "hover:border-blue-400/45",
+    text: "text-blue-300",
+    line: "from-blue-400 to-purple-400",
+    soft: "bg-blue-400/10",
+  },
+  purple: {
+    border: "hover:border-purple-400/45",
+    text: "text-purple-300",
+    line: "from-purple-400 to-blue-400",
+    soft: "bg-purple-400/10",
+  },
+  cyan: {
+    border: "hover:border-cyan-400/45",
+    text: "text-cyan-300",
+    line: "from-cyan-400 to-blue-400",
+    soft: "bg-cyan-400/10",
+  },
+};
+
+const viewport = { once: true, amount: 0.18 };
 
 export default function Projects() {
-  const [stars, setStars] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
-  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-  const [filter, setFilter] = useState('all');
 
   useEffect(() => {
-    setStars(generateStars(100));
-  }, []);
+    if (!selectedProject) {
+      return undefined;
+    }
 
-  // Sort projects by date (newest first)
-  const sortedProjects = [...projects].sort((a, b) => {
-    const dateA = parseInt(a.date);
-    const dateB = parseInt(b.date);
-    return dateB - dateA;
-  });
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setSelectedProject(null);
+      }
+    };
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedProject]);
 
   return (
-    <section id="projects" className="relative py-16 bg-black text-white overflow-hidden">
-      {/* Twinkling Stars */}
-      <div className="absolute inset-0 pointer-events-none">
-        {stars.map((star) => (
-          <motion.div
-            key={star.id}
-            className="absolute bg-white rounded-full shadow-sm"
-            style={{
-              width: `${star.size}px`,
-              height: `${star.size}px`,
-              top: `${star.y}%`,
-              left: `${star.x}%`,
-            }}
-            animate={{ opacity: [0.3, 1, 0.3] }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              repeatType: "mirror",
-              delay: star.delay,
-            }}
-          />
-        ))}
-      </div>
+    <section id="projects" className="relative overflow-hidden bg-[#070d1b] pb-20 pt-32 text-white sm:pb-24 sm:pt-36 lg:pb-28 lg:pt-40">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(124,58,237,0.12),transparent_34%),radial-gradient(circle_at_15%_25%,rgba(59,130,246,0.08),transparent_28%),radial-gradient(circle_at_85%_75%,rgba(34,211,238,0.05),transparent_30%)]" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-purple-400/50 to-transparent" />
 
-      {/* Background Gradient Elements */}
-      <div className="absolute w-[600px] h-[600px] bg-blue-500 rounded-full blur-[120px] opacity-10 -top-20 -left-40"></div>
-      <div className="absolute w-[500px] h-[500px] bg-purple-500 rounded-full blur-[120px] opacity-10 bottom-20 right-10"></div>
+      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+        <motion.div
+          className="mx-auto mb-10 max-w-2xl text-center sm:mb-12"
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={viewport}
+          transition={{ duration: 0.55, ease: "easeOut" }}
+        >
+          <div className="mb-4 flex items-center justify-center gap-3 font-mono text-xs text-purple-300">
+            <span>02</span>
+            <span className="h-px w-10 bg-purple-400/70" />
+          </div>
+          <h2 className="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
+            Selected{" "}
+            <span className="text-purple-300">
+              Projects
+            </span>
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-gray-400 sm:text-base">
+            A selection of full-stack and AI-powered projects built with practical architecture, thoughtful interfaces and real project constraints.
+          </p>
+        </motion.div>
 
-      {/* Section Title with Animation */}
-      <motion.div
-        className="text-center mb-12 relative z-10"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <h2 className="text-6xl font-extrabold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
-          Project Timeline
-        </h2>
-        <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mt-4 rounded-full"></div>
-        <p className="text-grey-400 mt-4 max-w-2xl mx-auto">A chronological journey through my development projects</p>
-      </motion.div>
-
-      {/* Timeline Container */}
-      <div className="max-w-4xl mx-auto px-4 relative z-10">
-        {/* Timeline Line */}
-        <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 h-[calc(100%-4rem)] w-1 bg-gradient-to-b from-blue-500 to-purple-500 top-8"></div>
-
-        {/* Projects Timeline */}
-        <div className="space-y-8 pt-8 pb-8">
-          {sortedProjects.map((project, index) => (
-            <motion.div
-              key={index}
-              className={`relative flex items-center ${index % 2 === 0 ? 'md:flex-row flex-row' : 'md:flex-row-reverse flex-row'}`}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true, amount: 0.2 }}
-            >
-              {/* Timeline Dot */}
-              <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 border-4 border-gray-900"></div>
-
-              {/* Project Card */}
-              <div className={`w-full md:w-5/12 ${index % 2 === 0 ? 'md:mr-auto ml-12' : 'md:ml-auto ml-12'}`}>
-                <motion.div
-                  className="bg-gray-900/60 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-800 group"
-                  whileHover={{ y: -5, boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' }}
-                >
-                  {/* Project Image */}
-                  <div className="relative overflow-hidden h-48">
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
-                    {project.loading ? (
-                      <div className="w-full h-full flex items-center justify-center bg-gray-800 animate-pulse">
-                        <span className="text-gray-300">🚧 Work in Progress...</span>
-                      </div>
-                    ) : (
-                      <img
-                        src={project.images[0]}
-                        alt={project.title}
-                        className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700"
-                      />
-                    )}
-                    
-                    {/* Date Badge */}
-                    <div className="absolute top-3 right-3 bg-black/70 backdrop-blur-sm text-white text-xs font-medium px-3 py-1 rounded-full border border-gray-700 z-20">
-                      {project.date}
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="p-5">
-                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-500 transition-all duration-300">
-                      {project.title}
-                    </h3>
-                    <p className="text-gray-400 text-sm mb-4">{project.description}</p>
-                    
-                    {/* Tech Stack Pills */}
-                    <div className="flex flex-wrap gap-1 mb-4">
-                      {project.tech.slice(0, 3).map((tech, idx) => (
-                        <span key={idx} className="text-xs bg-gray-800 text-gray-300 px-2 py-1 rounded-md">
-                          {tech}
-                        </span>
-                      ))}
-                      {project.tech.length > 3 && (
-                        <span className="text-xs bg-gray-800 text-gray-300 px-2 py-1 rounded-md">
-                          +{project.tech.length - 3}
-                        </span>
-                      )}
-                    </div>
-
-                    {/* View Project Button */}
-                    <motion.button
-                      className="w-full py-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium rounded-lg transition duration-300"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      onClick={() => {
-                        setSelectedProject(project);
-                        setSelectedImageIndex(0);
-                      }}
-                    >
-                      View Project
-                    </motion.button>
-                  </div>
-                </motion.div>
-              </div>
-            </motion.div>
+        <motion.div
+          className="grid grid-cols-1 gap-5 xl:grid-cols-2"
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.08,
+              },
+            },
+          }}
+        >
+          {projects.map((project) => (
+            <ProjectCard key={project.title} project={project} onSelect={() => setSelectedProject(project)} />
           ))}
-        </div>
+        </motion.div>
+
+        <motion.div
+          className="mx-auto mt-10 flex max-w-xl flex-col items-center justify-center gap-3 text-center text-sm text-gray-400 sm:flex-row"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={viewport}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
+          <FiStar className="h-5 w-5 text-purple-300" aria-hidden="true" />
+          <span>Interested in working together?</span>
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-2 font-medium text-purple-300 transition hover:text-cyan-200 focus:outline-none focus:ring-2 focus:ring-purple-300/50"
+          >
+            Let&apos;s connect
+            <FiArrowUpRight className="h-4 w-4" aria-hidden="true" />
+          </a>
+        </motion.div>
       </div>
 
-      {/* Project Modal - Enhanced Version */}
       <AnimatePresence>
         {selectedProject && (
-          <motion.div
-            className="fixed inset-0 bg-black/90 backdrop-blur-xl flex justify-center items-center z-50 px-4 overflow-y-auto py-8"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={(e) => {
-              if (e.target === e.currentTarget) setSelectedProject(null);
-            }}
-          >
-            <motion.div
-              className="bg-gray-900/80 backdrop-blur-md rounded-2xl border border-gray-700/50 p-6 sm:p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto relative shadow-[0_0_50px_rgba(79,70,229,0.15)]"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Close Button */}
-              <button 
-                className="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-400 hover:text-white z-50 bg-gray-800/80 hover:bg-gray-700 p-2 rounded-full transition-colors duration-200"
-                onClick={() => setSelectedProject(null)}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-
-              {/* Project Title */}
-              <h3 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 mb-2">
-                {selectedProject.title}
-              </h3>
-              
-              {/* Project Date */}
-              <div className="inline-block bg-gray-800 text-gray-300 text-sm px-3 py-1 rounded-full mb-6">
-                {selectedProject.date}
-              </div>
-
-              {/* Image Gallery with Indicators */}
-              <div className="relative w-full mb-6 rounded-xl overflow-hidden bg-black/40 aspect-video">
-                <motion.img 
-                  src={selectedProject.images[selectedImageIndex]} 
-                  alt={selectedProject.title} 
-                  className="w-full h-full object-contain"
-                  key={selectedImageIndex}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                />
-
-                {/* Image Navigation */}
-                {selectedProject.images.length > 1 && (
-                  <>
-                    {/* Left Arrow */}
-                    <button 
-                      className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full shadow-lg transition-colors duration-200"
-                      onClick={() => setSelectedImageIndex(prev => prev > 0 ? prev - 1 : selectedProject.images.length - 1)}
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                      </svg>
-                    </button>
-
-                    {/* Right Arrow */}
-                    <button 
-                      className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full shadow-lg transition-colors duration-200"
-                      onClick={() => setSelectedImageIndex(prev => prev < selectedProject.images.length - 1 ? prev + 1 : 0)}
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </button>
-
-                    {/* Image Indicators */}
-                    <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
-                      {selectedProject.images.map((_, idx) => (
-                        <button 
-                          key={idx} 
-                          className={`w-2 h-2 rounded-full transition-all ${selectedImageIndex === idx ? 'bg-white w-4' : 'bg-gray-400/50'}`}
-                          onClick={() => setSelectedImageIndex(idx)}
-                        />
-                      ))}
-                    </div>
-                  </>
-                )}
-              </div>
-
-              {/* Project Details */}
-              <div className="prose prose-invert max-w-none">
-                {selectedProject.details.split("\n\n").map((paragraph, index) => (
-                  <p key={index} className="text-gray-300 mb-4">
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
-
-              {/* Technologies Used */}
-              <div className="mt-6">
-                <h4 className="text-white text-lg font-semibold mb-3">Technologies</h4>
-                <div className="flex flex-wrap gap-2">
-                  {selectedProject.tech.map((tech, index) => (
-                    <span 
-                      key={index} 
-                      className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/30 text-white text-sm font-medium px-3 py-1.5 rounded-md"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="mt-8 flex flex-wrap gap-4 justify-center">
-                {selectedProject.repo && (
-                  <a 
-                    href={selectedProject.repo} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="flex-1 min-w-[200px]"
-                  >
-                    <motion.button 
-                      className="w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium rounded-lg flex items-center justify-center gap-2 transition duration-300"
-                      whileHover={{ scale: 1.03 }}
-                      whileTap={{ scale: 0.97 }}
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                      </svg>
-                      GitHub Repository
-                    </motion.button>
-                  </a>
-                )}
-                
-                {selectedProject.website && (
-                  <a 
-                    href={selectedProject.website} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="flex-1 min-w-[200px]"
-                  >
-                    <motion.button 
-                      className="w-full py-3 bg-white text-gray-900 font-medium rounded-lg flex items-center justify-center gap-2 transition duration-300 border border-transparent hover:bg-transparent hover:text-white hover:border-white"
-                      whileHover={{ scale: 1.03 }}
-                      whileTap={{ scale: 0.97 }}
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
-                      View Live Website
-                    </motion.button>
-                  </a>
-                )}
-              </div>
-            </motion.div>
-          </motion.div>
+          <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
         )}
       </AnimatePresence>
     </section>
+  );
+}
+
+function ProjectCard({ project, onSelect }) {
+  const accent = accentStyles[project.accent];
+  const cardTech = project.cardTech || project.tech.slice(0, 4);
+
+  return (
+    <motion.button
+      type="button"
+      onClick={onSelect}
+      className={`group/card relative overflow-hidden rounded-xl border border-white/10 bg-[#0c1426]/80 p-4 text-left shadow-lg shadow-black/10 backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:bg-[#101a31]/90 focus:outline-none focus:ring-2 focus:ring-purple-300/50 ${accent.border} sm:p-5`}
+      variants={{
+        hidden: { opacity: 0, y: 22 },
+        visible: { opacity: 1, y: 0 },
+      }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
+      <div className={`absolute inset-x-0 top-0 h-px bg-gradient-to-r ${accent.line} opacity-0 transition-opacity duration-300 group-hover/card:opacity-100`} />
+
+      <div className="grid min-h-[250px] grid-cols-1 gap-5 md:grid-cols-[0.92fr_1fr] md:items-center">
+        <ProjectVisual project={project} accent={accent} />
+
+        <div className="flex min-w-0 flex-col md:min-h-[210px]">
+          <h3 className="text-2xl font-semibold leading-tight tracking-normal text-white sm:text-3xl">
+            {project.title}
+          </h3>
+          {project.contextLabel && (
+            <p className={`mt-2 text-xs font-semibold uppercase tracking-[0.14em] ${accent.text}`}>
+              {project.contextLabel}
+            </p>
+          )}
+          <p className="mt-3 text-sm leading-6 text-gray-300">{project.description}</p>
+
+          <div className="mt-5 flex flex-wrap gap-2">
+            {cardTech.map((tech) => (
+              <span
+                key={tech}
+                className="rounded-lg border border-blue-400/20 bg-blue-500/10 px-3 py-1.5 text-xs font-medium text-gray-300"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+
+          <div className={`mt-auto inline-flex items-center justify-end gap-2 pt-6 text-sm font-medium ${accent.text}`}>
+            <span>View case study</span>
+            <FiArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover/card:translate-x-1" aria-hidden="true" />
+          </div>
+        </div>
+      </div>
+    </motion.button>
+  );
+}
+
+function ProjectVisual({ project, accent }) {
+  return (
+    <div className="relative min-h-[190px] overflow-hidden rounded-lg border border-white/10 bg-gray-950/70">
+      {project.image ? (
+        <img
+          src={project.image}
+          alt={project.imageAlt}
+          className="h-full min-h-[190px] w-full object-cover transition duration-500 group-hover/card:scale-[1.03]"
+        />
+      ) : project.visual === "jrcz" ? (
+        <JrczVisual accent={accent} />
+      ) : (
+        <SolaiMenuVisual accent={accent} />
+      )}
+    </div>
+  );
+}
+
+function JrczVisual({ accent }) {
+  return (
+    <div className="relative h-full min-h-[220px] p-5">
+      <div className={`absolute inset-0 ${accent.soft}`} />
+      <div className="relative flex h-full flex-col justify-between">
+        <div className="flex items-center justify-between">
+          <span className={`inline-flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-gray-950/70 ${accent.text}`}>
+            <FiMic className="h-4 w-4" aria-hidden="true" />
+          </span>
+          <span className="rounded-full border border-white/10 bg-gray-950/60 px-3 py-1 font-mono text-[0.65rem] uppercase tracking-[0.16em] text-gray-300">
+            approximately 65% reduction
+          </span>
+        </div>
+
+        <div className="my-5 rounded-xl border border-white/10 bg-gray-950/55 p-4">
+          <div className="mb-4 flex items-center justify-between gap-4 text-xs text-gray-400">
+            <span>Speech stream</span>
+            <span className={accent.text}>Dockerised backend prototype</span>
+          </div>
+          <div className="flex h-16 items-center gap-1.5" aria-hidden="true">
+            {["h-4", "h-8", "h-5", "h-10", "h-6", "h-12", "h-7", "h-9", "h-5", "h-8", "h-4", "h-6"].map((height, index) => (
+              <span
+                key={`${height}-${index}`}
+                className={`w-full rounded-full bg-gradient-to-t ${accent.line} ${height} opacity-70`}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-2 text-xs">
+          <div className="rounded-lg border border-white/10 bg-gray-950/55 p-3">
+            <div className="text-gray-500">Before</div>
+            <div className={`mt-1 font-mono text-lg font-semibold ${accent.text}`}>4.0 seconds</div>
+          </div>
+          <div className="rounded-lg border border-white/10 bg-gray-950/55 p-3">
+            <div className="text-gray-500">After</div>
+            <div className={`mt-1 font-mono text-lg font-semibold ${accent.text}`}>1.2–1.5 seconds</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SolaiMenuVisual({ accent }) {
+  return (
+    <div className="relative h-full min-h-[220px] p-5">
+      <div className={`absolute inset-0 ${accent.soft}`} />
+      <div className="relative flex h-full gap-4">
+        <div className="flex-1 rounded-xl border border-white/10 bg-gray-950/70 p-4">
+          <div className="mb-4 flex items-center justify-between">
+            <span className="text-xs font-medium text-gray-300">Menus</span>
+            <FiGlobe className={`h-4 w-4 ${accent.text}`} aria-hidden="true" />
+          </div>
+          {["Seasonal menu", "Lunch menu", "Drinks"].map((item, index) => (
+            <div key={item} className="mb-3 rounded-lg border border-white/10 bg-white/[0.04] p-2.5">
+              <div className="mb-2 flex items-center justify-between gap-3">
+                <span className="truncate text-xs text-gray-300">{item}</span>
+                <span className={`h-1.5 w-8 rounded-full bg-gradient-to-r ${accent.line}`} />
+              </div>
+              <div className="flex gap-1.5" aria-hidden="true">
+                {[0, 1, 2, 3].map((flag) => (
+                  <span
+                    key={`${index}-${flag}`}
+                    className="h-2 w-3 rounded-sm bg-gray-500/70"
+                  />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="hidden w-20 rounded-2xl border border-white/10 bg-gray-950/80 p-2 shadow-xl shadow-black/20 sm:block">
+          <div className="mb-2 h-1.5 w-8 rounded-full bg-white/20 mx-auto" />
+          <div className={`h-16 rounded-xl bg-gradient-to-br ${accent.line} opacity-80`} />
+          <div className="mt-3 space-y-2">
+            <div className="h-2 rounded-full bg-white/25" />
+            <div className="h-2 w-2/3 rounded-full bg-white/15" />
+            <div className="h-5 rounded-lg border border-white/10 bg-white/[0.04]" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ProjectModal({ project, onClose }) {
+  const accent = accentStyles[project.accent];
+
+  return (
+    <motion.div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-gray-950/85 px-4 py-8 backdrop-blur-md"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="project-modal-title"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={onClose}
+    >
+      <motion.div
+        className="relative max-h-[92vh] w-full max-w-[88rem] overflow-y-auto rounded-2xl border border-white/10 bg-[#0b1224] p-5 shadow-2xl shadow-black/40 sm:p-6 lg:p-7"
+        initial={{ opacity: 0, scale: 0.96, y: 18 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.96, y: 18 }}
+        transition={{ duration: 0.25, ease: "easeOut" }}
+        onClick={(event) => event.stopPropagation()}
+      >
+        <div className={`absolute inset-x-0 top-0 h-px bg-gradient-to-r ${accent.line}`} />
+
+        <button
+          type="button"
+          onClick={onClose}
+          className="absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-300 transition hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-300/50"
+          aria-label="Close project details"
+        >
+          <FiX className="h-4 w-4" aria-hidden="true" />
+        </button>
+
+        <div className="grid gap-7 lg:grid-cols-[1.35fr_0.85fr] lg:items-start xl:grid-cols-[1.55fr_0.85fr]">
+          <div className="lg:sticky lg:top-0">
+            <ProjectGallery project={project} accent={accent} />
+          </div>
+
+          <div className="pr-0 lg:pr-8">
+            <h3 id="project-modal-title" className="text-3xl font-semibold leading-tight text-white sm:text-4xl">
+              {project.title}
+            </h3>
+            {project.contextLabel && (
+              <p className={`mt-3 text-xs font-semibold uppercase tracking-[0.16em] ${accent.text}`}>
+                {project.contextLabel}
+              </p>
+            )}
+
+            <div className="mt-6">
+              <h4 className={`text-sm font-semibold uppercase tracking-[0.16em] ${accent.text}`}>
+                Overview
+              </h4>
+              <p className="mt-3 text-sm leading-7 text-gray-300 sm:text-base">
+                {project.overview}
+              </p>
+            </div>
+
+            {project.whatBuilt && (
+              <div className="mt-6">
+                <h4 className={`text-sm font-semibold uppercase tracking-[0.16em] ${accent.text}`}>
+                  {project.contributionHeading || "What I Built"}
+                </h4>
+                <p className="mt-3 text-sm leading-7 text-gray-300 sm:text-base">
+                  {project.whatBuilt}
+                </p>
+              </div>
+            )}
+
+            {project.contributionItems?.length > 0 && (
+              <div className="mt-6">
+                <h4 className={`text-sm font-semibold uppercase tracking-[0.16em] ${accent.text}`}>
+                  {project.contributionHeading || "My Contribution"}
+                </h4>
+                <ul className="mt-4 space-y-3">
+                  {project.contributionItems.map((detail) => (
+                    <li key={detail} className="flex gap-3 text-sm leading-6 text-gray-300">
+                      <FiCheckCircle className={`mt-1 h-4 w-4 flex-none ${accent.text}`} aria-hidden="true" />
+                      <span>{detail}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {project.keyFunctionality?.length > 0 && (
+              <div className="mt-6">
+                <h4 className={`text-sm font-semibold uppercase tracking-[0.16em] ${accent.text}`}>
+                  {project.outcomesHeading || "Key Functionality"}
+                </h4>
+                <ul className="mt-4 space-y-3">
+                  {project.keyFunctionality.map((detail) => (
+                    <li key={detail} className="flex gap-3 text-sm leading-6 text-gray-300">
+                      <FiCheckCircle className={`mt-1 h-4 w-4 flex-none ${accent.text}`} aria-hidden="true" />
+                      <span>{detail}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <div className="mt-7">
+              <h4 className={`text-sm font-semibold uppercase tracking-[0.16em] ${accent.text}`}>
+                Technology
+              </h4>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {project.tech.map((tech) => (
+                  <span
+                    key={tech}
+                    className="rounded-lg border border-blue-400/20 bg-blue-500/10 px-3 py-1.5 text-xs font-medium text-gray-300"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {project.links?.length > 0 && (
+              <div className="mt-7">
+                <h4 className={`text-sm font-semibold uppercase tracking-[0.16em] ${accent.text}`}>
+                  Links
+                </h4>
+                <ProjectLinks links={project.links} accent={accent} className="mt-4" />
+              </div>
+            )}
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+function ProjectGallery({ project, accent }) {
+  const images = project.images || [];
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const hasGallery = images.length > 1;
+
+  const showPreviousImage = () => {
+    setSelectedImageIndex((currentIndex) => (currentIndex === 0 ? images.length - 1 : currentIndex - 1));
+  };
+
+  const showNextImage = () => {
+    setSelectedImageIndex((currentIndex) => (currentIndex === images.length - 1 ? 0 : currentIndex + 1));
+  };
+
+  if (!images.length) {
+    return <ProjectVisual project={project} accent={accent} />;
+  }
+
+  return (
+    <div>
+      <div className="relative overflow-hidden rounded-xl border border-white/10 bg-gray-950/70">
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={images[selectedImageIndex]}
+            src={images[selectedImageIndex]}
+            alt={`${project.title} screenshot ${selectedImageIndex + 1}`}
+            className="h-[280px] w-full bg-gray-950 object-contain sm:h-[420px] lg:h-[560px]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.22 }}
+          />
+        </AnimatePresence>
+
+        {hasGallery && (
+          <>
+            <button
+              type="button"
+              onClick={showPreviousImage}
+              className="absolute left-3 top-1/2 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-gray-950/70 text-gray-200 shadow-lg shadow-black/25 backdrop-blur transition hover:bg-gray-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-300/50"
+              aria-label="Show previous project image"
+            >
+              <FiChevronLeft className="h-5 w-5" aria-hidden="true" />
+            </button>
+            <button
+              type="button"
+              onClick={showNextImage}
+              className="absolute right-3 top-1/2 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-gray-950/70 text-gray-200 shadow-lg shadow-black/25 backdrop-blur transition hover:bg-gray-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-300/50"
+              aria-label="Show next project image"
+            >
+              <FiChevronRight className="h-5 w-5" aria-hidden="true" />
+            </button>
+
+            <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5">
+              {images.map((image, index) => (
+                <button
+                  key={image}
+                  type="button"
+                  onClick={() => setSelectedImageIndex(index)}
+                  className={`h-1.5 rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-purple-300/50 ${
+                    selectedImageIndex === index ? `w-6 bg-gradient-to-r ${accent.line}` : "w-1.5 bg-white/40"
+                  }`}
+                  aria-label={`Show project image ${index + 1}`}
+                />
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+
+      {hasGallery && (
+        <>
+          <div className="mt-3 flex items-center justify-between gap-3 text-xs text-gray-400">
+            <span className="inline-flex items-center gap-2">
+              <FiImage className={`h-4 w-4 ${accent.text}`} aria-hidden="true" />
+              {selectedImageIndex + 1} / {images.length}
+            </span>
+            <span>Use arrows, dots or thumbnails to browse photos</span>
+          </div>
+
+          <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
+            {images.map((image, index) => (
+              <button
+                key={`thumb-${image}`}
+                type="button"
+                onClick={() => setSelectedImageIndex(index)}
+                className={`h-12 w-[4.5rem] flex-none overflow-hidden rounded-lg border transition focus:outline-none focus:ring-2 focus:ring-purple-300/50 sm:h-14 sm:w-20 ${
+                  selectedImageIndex === index ? "border-purple-300/70" : "border-white/10 opacity-70 hover:opacity-100"
+                }`}
+                aria-label={`Open thumbnail ${index + 1}`}
+              >
+                <img src={image} alt="" className="h-full w-full object-cover" />
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+function ProjectLinks({ links, accent, className = "" }) {
+  if (!links?.length) {
+    return null;
+  }
+
+  return (
+    <div className={`flex flex-wrap gap-3 ${className}`}>
+      {links.map((link) => {
+        const Icon = link.icon || FiExternalLink;
+        const hasTextArrow = link.label.includes("↗");
+
+        return (
+          <a
+            key={link.href}
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`inline-flex items-center gap-2 text-sm font-medium ${accent.text} transition hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-300/50`}
+          >
+            <Icon className="h-4 w-4" aria-hidden="true" />
+            <span>{link.label}</span>
+            {!hasTextArrow && <FiArrowUpRight className="h-4 w-4" aria-hidden="true" />}
+          </a>
+        );
+      })}
+    </div>
   );
 }
