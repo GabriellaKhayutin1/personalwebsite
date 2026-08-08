@@ -210,11 +210,14 @@ export default function Projects() {
     };
 
     const previousOverflow = document.body.style.overflow;
+    const previousHtmlOverflow = document.documentElement.style.overflow;
     document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
       document.body.style.overflow = previousOverflow;
+      document.documentElement.style.overflow = previousHtmlOverflow;
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [selectedProject]);
@@ -455,7 +458,7 @@ function ProjectModal({ project, onClose }) {
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-gray-950/85 px-4 py-8 backdrop-blur-md"
+      className="fixed inset-0 z-50 flex h-[100dvh] items-center justify-center overflow-hidden bg-gray-950/85 p-3 backdrop-blur-md lg:px-4 lg:py-8"
       role="dialog"
       aria-modal="true"
       aria-labelledby="project-modal-title"
@@ -465,7 +468,7 @@ function ProjectModal({ project, onClose }) {
       onClick={onClose}
     >
       <motion.div
-        className="relative max-h-[92vh] w-full max-w-[88rem] overflow-y-auto rounded-2xl border border-white/10 bg-[#0b1224] p-5 shadow-2xl shadow-black/40 sm:p-6 lg:p-7"
+        className="relative max-h-[calc(100dvh-24px)] w-[calc(100vw-24px)] max-w-full overflow-x-hidden overflow-y-auto overscroll-contain rounded-xl border border-white/10 bg-[#0b1224] p-4 shadow-2xl shadow-black/40 sm:p-5 lg:max-h-[92vh] lg:w-full lg:max-w-[88rem] lg:rounded-2xl lg:p-7"
         initial={{ opacity: 0, scale: 0.96, y: 18 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.96, y: 18 }}
@@ -474,22 +477,33 @@ function ProjectModal({ project, onClose }) {
       >
         <div className={`absolute inset-x-0 top-0 h-px bg-gradient-to-r ${accent.line}`} />
 
+        <div className="sticky top-0 z-30 -mx-4 -mt-4 mb-4 flex justify-end bg-[#0b1224]/95 px-3 py-3 backdrop-blur sm:-mx-5 sm:-mt-5 lg:hidden">
+          <button
+            type="button"
+            onClick={onClose}
+            className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/10 text-gray-100 shadow-lg shadow-black/25 transition hover:bg-white/15 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-300/70"
+            aria-label="Close project"
+          >
+            <FiX className="h-5 w-5" aria-hidden="true" />
+          </button>
+        </div>
+
         <button
           type="button"
           onClick={onClose}
-          className="absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-300 transition hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-300/50"
-          aria-label="Close project details"
+          className="absolute right-4 top-4 z-30 hidden h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-300 transition hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-300/50 lg:inline-flex"
+          aria-label="Close project"
         >
           <FiX className="h-4 w-4" aria-hidden="true" />
         </button>
 
-        <div className="grid gap-7 lg:grid-cols-[1.35fr_0.85fr] lg:items-start xl:grid-cols-[1.55fr_0.85fr]">
-          <div className="lg:sticky lg:top-0">
+        <div className="grid min-w-0 gap-6 md:gap-7 lg:grid-cols-[1.35fr_0.85fr] lg:items-start xl:grid-cols-[1.55fr_0.85fr]">
+          <div className="min-w-0 lg:sticky lg:top-0">
             <ProjectGallery project={project} accent={accent} />
           </div>
 
-          <div className="pr-0 lg:pr-8">
-            <h3 id="project-modal-title" className="text-3xl font-semibold leading-tight text-white sm:text-4xl">
+          <div className="min-w-0 pr-0 lg:pr-8">
+            <h3 id="project-modal-title" className="break-words text-2xl font-semibold leading-tight text-white sm:text-3xl md:text-4xl">
               {project.title}
             </h3>
             {project.contextLabel && (
@@ -595,18 +609,22 @@ function ProjectGallery({ project, accent }) {
   };
 
   if (!images.length) {
-    return <ProjectVisual project={project} accent={accent} />;
+    return (
+      <div className="min-w-0 overflow-x-hidden">
+        <ProjectVisual project={project} accent={accent} />
+      </div>
+    );
   }
 
   return (
-    <div>
-      <div className="relative overflow-hidden rounded-xl border border-white/10 bg-gray-950/70">
+    <div className="min-w-0 overflow-x-hidden">
+      <div className="relative min-w-0 overflow-hidden rounded-xl border border-white/10 bg-gray-950/70">
         <AnimatePresence mode="wait">
           <motion.img
             key={images[selectedImageIndex]}
             src={images[selectedImageIndex]}
             alt={`${project.title} screenshot ${selectedImageIndex + 1}`}
-            className="h-[280px] w-full bg-gray-950 object-contain sm:h-[420px] lg:h-[560px]"
+            className="h-auto max-h-[44svh] w-full bg-gray-950 object-contain lg:h-[560px] lg:max-h-none"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -619,7 +637,7 @@ function ProjectGallery({ project, accent }) {
             <button
               type="button"
               onClick={showPreviousImage}
-              className="absolute left-3 top-1/2 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-gray-950/70 text-gray-200 shadow-lg shadow-black/25 backdrop-blur transition hover:bg-gray-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-300/50"
+              className="absolute left-3 top-1/2 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-gray-950/70 text-gray-200 shadow-lg shadow-black/25 backdrop-blur transition hover:bg-gray-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-300/50 lg:h-9 lg:w-9"
               aria-label="Show previous project image"
             >
               <FiChevronLeft className="h-5 w-5" aria-hidden="true" />
@@ -627,7 +645,7 @@ function ProjectGallery({ project, accent }) {
             <button
               type="button"
               onClick={showNextImage}
-              className="absolute right-3 top-1/2 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-gray-950/70 text-gray-200 shadow-lg shadow-black/25 backdrop-blur transition hover:bg-gray-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-300/50"
+              className="absolute right-3 top-1/2 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-gray-950/70 text-gray-200 shadow-lg shadow-black/25 backdrop-blur transition hover:bg-gray-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-300/50 lg:h-9 lg:w-9"
               aria-label="Show next project image"
             >
               <FiChevronRight className="h-5 w-5" aria-hidden="true" />
@@ -652,15 +670,15 @@ function ProjectGallery({ project, accent }) {
 
       {hasGallery && (
         <>
-          <div className="mt-3 flex items-center justify-between gap-3 text-xs text-gray-400">
-            <span className="inline-flex items-center gap-2">
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-gray-400">
+            <span className="inline-flex min-w-0 items-center gap-2">
               <FiImage className={`h-4 w-4 ${accent.text}`} aria-hidden="true" />
               {selectedImageIndex + 1} / {images.length}
             </span>
-            <span>Use arrows, dots or thumbnails to browse photos</span>
+            <span className="min-w-0 text-right">Use arrows, dots or thumbnails to browse photos</span>
           </div>
 
-          <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
+          <div className="mt-3 flex max-w-full gap-2 overflow-x-auto pb-1">
             {images.map((image, index) => (
               <button
                 key={`thumb-${image}`}
