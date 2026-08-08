@@ -164,7 +164,7 @@ export default function Navbar() {
           ))}
           
           {/* CV Download Button */}
-          <a href="/Gabriella_Khayutin_Software_Developer_CV.pdf" download="Gabriella_Khayutin_Software_Developer_CV.pdf">
+          <a href="/Gabriella_Khayutin_CV.pdf" download="Gabriella_Khayutin_CV.pdf">
             <motion.button 
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.96 }}
@@ -211,8 +211,8 @@ export default function Navbar() {
               
               {/* CV Download Button */}
               <motion.a 
-                href="/Gabriella_Khayutin_Software_Developer_CV.pdf" 
-                download="Gabriella_Khayutin_Software_Developer_CV.pdf"
+                href="/Gabriella_Khayutin_CV.pdf" 
+                download="Gabriella_Khayutin_CV.pdf"
                 className="mt-2"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
