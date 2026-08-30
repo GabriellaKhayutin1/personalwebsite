@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 import {
   FiArrowUpRight,
   FiChevronLeft,
@@ -32,6 +33,15 @@ const projects = [
       "Expanded the AI feedback generator with five communication indicators",
     ],
     tech: ["Python", "FastAPI", "WebSockets", "WhisperLive", "faster-whisper", "Docker"],
+    image: "/internship.jpg",
+    images: ["/internship.jpg", "/videoai_9468.png", "/vr2.jpg"],
+    imageAlt: "Headset user training with an AI virtual patient displayed on a classroom screen",
+    imageAlts: [
+      "Headset user training with an AI virtual patient displayed on a classroom screen",
+      "Nursing student wearing a VR headset while a virtual patient is shown on a screen",
+      "VR training room with a headset user, hospital bed and virtual patient display",
+    ],
+    imageFit: "contain",
     visual: "jrcz",
     accent: "purple",
     links: [],
@@ -52,6 +62,39 @@ const projects = [
       "Search and filtering, restaurant specials and events, and menu analytics",
     ],
     tech: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase", "OpenAI API", "Vercel"],
+    image: "/Artboard 8.png",
+    images: [
+      "/Artboard 8.png",
+      "/solai-overview.png",
+      "/solai-bigoverview.png",
+      "/solai-menumanager.png",
+      "/solai-menudesign.png",
+      "/solai-languagessettings.png",
+      "/solai-specialevents.png",
+      "/solai-insights.png",
+      "/solai-qr.png",
+      "/solai-restaurantsettongs.png",
+      "/solai-createrestaurant.png",
+      "/solai-login.png",
+      "/solai-signup.png",
+    ],
+    imageAlt: "SolaiMenu logo",
+    imageAlts: [
+      "SolaiMenu logo",
+      "SolaiMenu restaurant dashboard overview screenshot",
+      "SolaiMenu detailed restaurant overview screenshot",
+      "SolaiMenu menu manager screenshot",
+      "SolaiMenu menu design editor screenshot",
+      "SolaiMenu language settings screenshot",
+      "SolaiMenu specials and events management screenshot",
+      "SolaiMenu analytics and insights screenshot",
+      "SolaiMenu QR code preview screenshot",
+      "SolaiMenu restaurant settings screenshot",
+      "SolaiMenu create restaurant screen screenshot",
+      "SolaiMenu login screen screenshot",
+      "SolaiMenu signup screen screenshot",
+    ],
+    imageTreatment: "logo",
     visual: "solaimenu",
     accent: "blue",
     links: [],
@@ -84,6 +127,16 @@ const projects = [
       "/smartstorage2.png",
     ],
     imageAlt: "Smart Storage pantry management screenshot",
+    imageAlts: [
+      "Smart Storage pantry overview screenshot",
+      "Smart Storage home dashboard screenshot",
+      "Smart Storage user profile screenshot",
+      "Smart Storage CO2 savings chart screenshot",
+      "Smart Storage food-saving tips screenshot",
+      "Smart Storage Google Calendar integration screenshot",
+      "Smart Storage leaderboard screenshot",
+      "Smart Storage pantry item details screenshot",
+    ],
     accent: "cyan",
     links: [
       {
@@ -112,8 +165,14 @@ const projects = [
     ],
     tech: ["SvelteKit", "TypeScript", "Tailwind CSS", "Node.js", "Express.js"],
     image: "/junker.png",
-    images: ["/junker.png", "/junker1.jpeg"],
+    images: ["/junker.png", "/junker1.jpeg", "/junker1.jpg", "/junker2.jpg"],
     imageAlt: "JUNKER item-exchange platform screenshot",
+    imageAlts: [
+      "JUNKER item-exchange platform screenshot",
+      "JUNKER app interface screenshot",
+      "JUNKER project presentation photo",
+      "JUNKER team project showcase photo",
+    ],
     accent: "blue",
     links: [],
   },
@@ -135,6 +194,10 @@ const projects = [
     image: "/itconference.png",
     images: ["/itconference.png", "/itlogo.png"],
     imageAlt: "HZ ICT Conference website landing page screenshot",
+    imageAlts: [
+      "HZ ICT Conference website landing page screenshot",
+      "HZ ICT Conference logo graphic",
+    ],
     accent: "purple",
     links: [
       {
@@ -167,6 +230,10 @@ const projects = [
     image: "/ai.png",
     images: ["/ai.png", "/ideapolish.jpg"],
     imageAlt: "IdeaPolish.ai landing page screenshot",
+    imageAlts: [
+      "IdeaPolish.ai landing page screenshot",
+      "IdeaPolish.ai product interface screenshot",
+    ],
     accent: "cyan",
     links: [],
   },
@@ -350,13 +417,17 @@ function ProjectCard({ project, onSelect }) {
 }
 
 function ProjectVisual({ project, accent }) {
+  const isLogo = project.imageTreatment === "logo" && project.image === "/Artboard 8.png";
+
   return (
-    <div className="relative min-h-[190px] overflow-hidden rounded-lg border border-white/10 bg-gray-950/70">
+    <div className={`relative min-h-[190px] overflow-hidden rounded-lg border border-white/10 ${isLogo ? "bg-black" : "bg-gray-950/70"}`}>
       {project.image ? (
-        <img
+        <Image
           src={project.image}
           alt={project.imageAlt}
-          className="h-full min-h-[190px] w-full object-cover transition duration-500 group-hover/card:scale-[1.03]"
+          fill
+          sizes="(min-width: 1280px) 38vw, (min-width: 768px) 44vw, 100vw"
+          className={`${isLogo ? "object-contain p-12 sm:p-14" : project.imageFit === "contain" ? "object-contain group-hover/card:scale-[1.03]" : "object-cover group-hover/card:scale-[1.03]"} bg-black transition duration-500`}
         />
       ) : project.visual === "jrcz" ? (
         <JrczVisual accent={accent} />
@@ -477,33 +548,24 @@ function ProjectModal({ project, onClose }) {
       >
         <div className={`absolute inset-x-0 top-0 h-px bg-gradient-to-r ${accent.line}`} />
 
-        <div className="sticky top-0 z-30 -mx-4 -mt-4 mb-4 flex justify-end bg-[#0b1224]/95 px-3 py-3 backdrop-blur sm:-mx-5 sm:-mt-5 lg:hidden">
+        <div className="mb-4 flex justify-end">
           <button
             type="button"
             onClick={onClose}
-            className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/10 text-gray-100 shadow-lg shadow-black/25 transition hover:bg-white/15 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-300/70"
+            className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/10 text-gray-100 shadow-lg shadow-black/25 transition hover:bg-white/15 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-300/70 lg:h-9 lg:w-9"
             aria-label="Close project"
           >
             <FiX className="h-5 w-5" aria-hidden="true" />
           </button>
         </div>
 
-        <button
-          type="button"
-          onClick={onClose}
-          className="absolute right-4 top-4 z-30 hidden h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-300 transition hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-300/50 lg:inline-flex"
-          aria-label="Close project"
-        >
-          <FiX className="h-4 w-4" aria-hidden="true" />
-        </button>
-
-        <div className="grid min-w-0 gap-6 md:gap-7 lg:grid-cols-[1.35fr_0.85fr] lg:items-start xl:grid-cols-[1.55fr_0.85fr]">
-          <div className="min-w-0 lg:sticky lg:top-0">
+        <div className="grid min-h-0 min-w-0 grid-cols-1 gap-7 xl:grid-cols-[minmax(0,1.25fr)_minmax(22rem,0.85fr)] xl:items-start 2xl:grid-cols-[minmax(0,1.45fr)_minmax(24rem,0.85fr)]">
+          <div className="min-h-0 min-w-0 xl:sticky xl:top-0">
             <ProjectGallery project={project} accent={accent} />
           </div>
 
-          <div className="min-w-0 pr-0 lg:pr-8">
-            <h3 id="project-modal-title" className="break-words text-2xl font-semibold leading-tight text-white sm:text-3xl md:text-4xl">
+          <div className="min-h-0 min-w-0 overflow-x-hidden pb-1 pr-1 pt-2 sm:pr-2 sm:pt-3 xl:max-h-[calc(92vh-8rem)] xl:overflow-y-auto xl:pr-5 xl:pt-4">
+            <h3 id="project-modal-title" className="break-words text-2xl font-semibold leading-[1.15] text-white sm:text-3xl md:text-4xl">
               {project.title}
             </h3>
             {project.contextLabel && (
@@ -599,14 +661,40 @@ function ProjectGallery({ project, accent }) {
   const images = project.images || [];
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const hasGallery = images.length > 1;
+  const isLogo = project.imageTreatment === "logo" && images[selectedImageIndex] === "/Artboard 8.png";
+  const selectedImageAlt = project.imageAlts?.[selectedImageIndex] || project.imageAlt || `${project.title} image ${selectedImageIndex + 1}`;
 
-  const showPreviousImage = () => {
+  const showPreviousImage = useCallback(() => {
     setSelectedImageIndex((currentIndex) => (currentIndex === 0 ? images.length - 1 : currentIndex - 1));
-  };
+  }, [images.length]);
 
-  const showNextImage = () => {
+  const showNextImage = useCallback(() => {
     setSelectedImageIndex((currentIndex) => (currentIndex === images.length - 1 ? 0 : currentIndex + 1));
-  };
+  }, [images.length]);
+
+  useEffect(() => {
+    if (!hasGallery) {
+      return undefined;
+    }
+
+    const handleKeyDown = (event) => {
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        showPreviousImage();
+      }
+
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        showNextImage();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [hasGallery, images.length, showNextImage, showPreviousImage]);
 
   if (!images.length) {
     return (
@@ -618,18 +706,25 @@ function ProjectGallery({ project, accent }) {
 
   return (
     <div className="min-w-0 overflow-x-hidden">
-      <div className="relative min-w-0 overflow-hidden rounded-xl border border-white/10 bg-gray-950/70">
+      <div className={`relative min-w-0 overflow-hidden rounded-xl border border-white/10 bg-black ${isLogo ? "aspect-[16/10] lg:aspect-[16/11]" : "aspect-[16/10] lg:aspect-[16/9]"}`}>
         <AnimatePresence mode="wait">
-          <motion.img
+          <motion.div
             key={images[selectedImageIndex]}
-            src={images[selectedImageIndex]}
-            alt={`${project.title} screenshot ${selectedImageIndex + 1}`}
-            className="h-auto max-h-[44svh] w-full bg-gray-950 object-contain lg:h-[560px] lg:max-h-none"
+            className="absolute inset-0"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.22 }}
-          />
+          >
+            <Image
+              src={images[selectedImageIndex]}
+              alt={selectedImageAlt}
+              fill
+              sizes="(min-width: 1280px) 58vw, (min-width: 1024px) 54vw, 100vw"
+              className={`${isLogo ? "object-contain p-16 sm:p-20 lg:p-28 xl:p-32" : "object-contain"}`}
+              priority={selectedImageIndex === 0}
+            />
+          </motion.div>
         </AnimatePresence>
 
         {hasGallery && (
@@ -638,7 +733,7 @@ function ProjectGallery({ project, accent }) {
               type="button"
               onClick={showPreviousImage}
               className="absolute left-3 top-1/2 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-gray-950/70 text-gray-200 shadow-lg shadow-black/25 backdrop-blur transition hover:bg-gray-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-300/50 lg:h-9 lg:w-9"
-              aria-label="Show previous project image"
+              aria-label={`Show previous ${project.title} image`}
             >
               <FiChevronLeft className="h-5 w-5" aria-hidden="true" />
             </button>
@@ -646,7 +741,7 @@ function ProjectGallery({ project, accent }) {
               type="button"
               onClick={showNextImage}
               className="absolute right-3 top-1/2 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-gray-950/70 text-gray-200 shadow-lg shadow-black/25 backdrop-blur transition hover:bg-gray-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-300/50 lg:h-9 lg:w-9"
-              aria-label="Show next project image"
+              aria-label={`Show next ${project.title} image`}
             >
               <FiChevronRight className="h-5 w-5" aria-hidden="true" />
             </button>
@@ -660,7 +755,8 @@ function ProjectGallery({ project, accent }) {
                   className={`h-1.5 rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-purple-300/50 ${
                     selectedImageIndex === index ? `w-6 bg-gradient-to-r ${accent.line}` : "w-1.5 bg-white/40"
                   }`}
-                  aria-label={`Show project image ${index + 1}`}
+                  aria-label={`Show ${project.title} image ${index + 1}`}
+                  aria-current={selectedImageIndex === index ? "true" : undefined}
                 />
               ))}
             </div>
@@ -687,9 +783,17 @@ function ProjectGallery({ project, accent }) {
                 className={`h-12 w-[4.5rem] flex-none overflow-hidden rounded-lg border transition focus:outline-none focus:ring-2 focus:ring-purple-300/50 sm:h-14 sm:w-20 ${
                   selectedImageIndex === index ? "border-purple-300/70" : "border-white/10 opacity-70 hover:opacity-100"
                 }`}
-                aria-label={`Open thumbnail ${index + 1}`}
+                aria-label={`Open ${project.title} image ${index + 1}`}
+                aria-current={selectedImageIndex === index ? "true" : undefined}
               >
-                <img src={image} alt="" className="h-full w-full object-cover" />
+                <Image
+                  src={image}
+                  alt={`${project.imageAlts?.[index] || project.imageAlt || `${project.title} image ${index + 1}`} thumbnail`}
+                  width={160}
+                  height={112}
+                  sizes="80px"
+                  className="h-full w-full object-cover"
+                />
               </button>
             ))}
           </div>

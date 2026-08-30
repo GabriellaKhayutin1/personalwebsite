@@ -17,7 +17,7 @@ export default function Footer() {
 
         <div className="flex items-center justify-center gap-2 sm:justify-end">
           <a
-            href="https://www.linkedin.com/in/gabriellakhayutin"
+            href="https://www.linkedin.com/in/gabriella-khayutin/"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-lg text-gray-300 transition-colors duration-200 hover:text-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-300/70"

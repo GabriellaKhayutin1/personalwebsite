@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
-import { useState, useRef } from "react";
-import emailjs from '@emailjs/browser';
+import { useState } from "react";
 
 const contactParticles = [
   { size: 1.3, top: 12, left: 18, glow: 1.4, duration: 8.5, delay: 0.2 },
@@ -21,11 +20,11 @@ const contactParticles = [
 ];
 
 export default function Contact() {
-  const formRef = useRef();
   const [formState, setFormState] = useState({
     name: "",
     email: "",
     message: "",
+    website: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -38,28 +37,48 @@ export default function Contact() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     setErrorMessage("");
-    
-    // EmailJS configuration
-    const serviceId = 'service_xmo69nn';
-    const templateId = 'template_iomempx';
-    const publicKey = '71QrzDW819GHth889';
-    
-    emailjs.sendForm(serviceId, templateId, formRef.current, publicKey)
-      .then((result) => {
-        setIsSubmitting(false);
-        setIsSubmitted(true);
-        setFormState({ name: "", email: "", message: "" });
-        setTimeout(() => setIsSubmitted(false), 5000);
-      })
-      .catch((error) => {
-        setIsSubmitting(false);
-        setErrorMessage("Failed to send email. Please try again or contact me directly via email.");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formState),
       });
+
+      const responseText = await response.text();
+      let data = {};
+
+      try {
+        data = responseText ? JSON.parse(responseText) : {};
+      } catch {
+        data = {
+          message: "The contact form could not reach the email service. Please try again.",
+        };
+      }
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to send email.");
+      }
+
+      setIsSubmitted(true);
+      setFormState({ name: "", email: "", message: "", website: "" });
+      setTimeout(() => setIsSubmitted(false), 5000);
+    } catch (error) {
+      setErrorMessage(
+        error.message || "Failed to send email. Please try again or contact me directly via email."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
+  const charactersRemaining = 1500 - formState.message.length;
 
   return (
     <section
@@ -222,7 +241,17 @@ export default function Contact() {
                   <span>Message sent successfully! I&apos;ll get back to you soon.</span>
                 </motion.div>
               ) : (
-                <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <input
+                    type="text"
+                    name="website"
+                    value={formState.website}
+                    onChange={handleChange}
+                    className="hidden"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                  />
                   {errorMessage && (
                     <div className="bg-red-800/30 border border-red-500/30 rounded-lg p-4 text-red-300 mb-4">
                       {errorMessage}
@@ -238,6 +267,7 @@ export default function Contact() {
                       value={formState.name}
                       onChange={handleChange}
                       required
+                      maxLength={80}
                       className="w-full px-4 py-3 rounded-lg bg-gray-700/50 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
                       placeholder="Your name"
                     />
@@ -252,22 +282,29 @@ export default function Contact() {
                       value={formState.email}
                       onChange={handleChange}
                       required
+                      maxLength={120}
                       className="w-full px-4 py-3 rounded-lg bg-gray-700/50 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
-                      placeholder="Your email"
+                      placeholder="your.email@example.com"
                     />
+                    <p className="mt-1 text-xs text-gray-500">I&rsquo;ll use this address only to reply to your message.</p>
                   </div>
                   
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-1">Message</label>
+                    <div className="mb-1 flex items-center justify-between gap-3">
+                      <label htmlFor="message" className="block text-sm font-medium text-gray-300">Message</label>
+                      <span className="text-xs text-gray-500">{charactersRemaining} left</span>
+                    </div>
                     <textarea
                       id="message"
                       name="message"
                       value={formState.message}
                       onChange={handleChange}
                       required
+                      minLength={10}
+                      maxLength={1500}
                       rows={5}
                       className="w-full px-4 py-3 rounded-lg bg-gray-700/50 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none"
-                      placeholder="Your message"
+                      placeholder="Tell me briefly what you would like to discuss."
                     />
                   </div>
                   
@@ -295,6 +332,9 @@ export default function Contact() {
                         "Send Message"
                       )}
                     </motion.button>
+                    <p className="mt-3 text-center text-xs text-gray-500">
+                      To reduce spam, each email address can send up to 2 messages every 24 hours.
+                    </p>
                   </div>
                 </form>
               )}
