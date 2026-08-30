@@ -82,11 +82,11 @@ export default function Hero() {
             </h1>
 
             <p className="mt-4 text-2xl font-semibold text-purple-300 sm:text-3xl">
-              Backend Development & AI
+              Backend Development, AI &amp; Product Thinking
             </p>
 
             <p className="mt-6 max-w-xl text-lg leading-8 text-gray-300 sm:text-xl sm:leading-9 lg:max-w-2xl">
-              I build practical software at the intersection of backend systems, AI and user experience.
+              I&rsquo;m a final-year Software Engineering student who enjoys building practical products with backend systems and AI. I care about making technology useful, clear and easy for people to use.
             </p>
 
             <p className="mt-4 text-base font-medium text-gray-400 sm:text-lg">

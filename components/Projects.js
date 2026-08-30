@@ -20,9 +20,9 @@ const projects = [
     title: "AI-Powered VR Training Platform",
     contextLabel: "Software Engineering Internship · Backend & AI",
     description:
-      "A speech-to-text and AI-feedback prototype developed for an AI-powered virtual-patient training platform used by nursing students.",
+      "During my internship at JRCZ Data Science Lab, I built and tested a speech-to-text and AI-feedback prototype for a virtual-patient platform used in nursing education.",
     overview:
-      "A speech-to-text and AI-feedback prototype developed for an AI-powered virtual-patient training platform used by nursing students.",
+      "During my internship at JRCZ Data Science Lab, I built and tested a speech-to-text and AI-feedback prototype for a virtual-patient platform used in nursing education.",
     whatBuilt:
       "Engineered and benchmarked a Dockerised Python speech-to-text backend prototype designed for near-real-time Dutch transcription and integration with the platform’s AI feedback workflow.",
     outcomesHeading: "Key Outcomes",
@@ -50,9 +50,9 @@ const projects = [
     title: "SolaiMenu",
     contextLabel: "Full-Stack Product Development",
     description:
-      "A multilingual AI-powered QR-menu SaaS product that enables restaurants to create, manage and publish menus in ten languages from one dashboard.",
+      "Co-building a multilingual QR-menu platform that helps restaurants create, manage and publish their menus in ten languages from one dashboard.",
     overview:
-      "A multilingual AI-powered QR-menu SaaS product that enables restaurants to create, manage and publish menus in ten languages from one dashboard.",
+      "Co-building a multilingual QR-menu platform that helps restaurants create, manage and publish their menus in ten languages from one dashboard.",
     whatBuilt:
       "Developed both the restaurant-facing menu-management experience and the customer-facing QR menu, with workflows for creating, updating and publishing multilingual menu content.",
     keyFunctionality: [
@@ -102,9 +102,9 @@ const projects = [
   {
     title: "Smart Storage",
     description:
-      "Smart pantry app with ingredient management, expiry tracking, Google Calendar integration and CO₂-savings analytics.",
+      "A smart-pantry project for tracking ingredients and expiry dates, with Google Calendar integration and CO₂-savings insights.",
     overview:
-      "A smart pantry and food-management application designed to help users organise ingredients, track expiry dates and better understand the financial and environmental impact of food usage.",
+      "A smart-pantry project for tracking ingredients and expiry dates, with Google Calendar integration and CO₂-savings insights.",
     whatBuilt:
       "Developed the full-stack application, including authenticated user accounts, ingredient-management workflows, personalised dashboards and responsive interfaces.",
     keyFunctionality: [
@@ -150,9 +150,9 @@ const projects = [
     title: "JUNKER",
     contextLabel: "Six-Person Team Project",
     description:
-      "An eco-conscious item-exchange platform developed in a six-person team to help users give unwanted items a second life.",
+      "Built in a team of six, JUNKER helps people give unwanted items a second life by listing and exchanging them with others. The project reached HZ’s Dragons’ Den final and placed third.",
     overview:
-      "An eco-conscious item-exchange platform developed in a six-person team to help users give unwanted items a second life.",
+      "Built in a team of six, JUNKER helps people give unwanted items a second life by listing and exchanging them with others. The project reached HZ’s Dragons’ Den final and placed third.",
     whatBuilt:
       "Developed frontend and backend functionality within the team and contributed to shaping the platform’s user experience.",
     contributionHeading: "My Contribution",
@@ -180,9 +180,9 @@ const projects = [
     title: "IT Conference Website",
     contextLabel: "Team Project · Frontend Developer",
     description:
-      "Contributed to the public-facing website for the official HZ ICT Conference, translating Figma designs into responsive pages and navigation as part of the website development team.",
+      "As part of the website team, I turned Figma designs into responsive pages and navigation for the official HZ ICT Conference website.",
     overview:
-      "Contributed to the public-facing website for the official HZ ICT Conference, translating Figma designs into responsive pages and navigation as part of the website development team.",
+      "As part of the website team, I turned Figma designs into responsive pages and navigation for the official HZ ICT Conference website.",
     contributionHeading: "My Contribution",
     contributionItems: [
       "Developed the speakers page, FAQ and responsive navigation",
@@ -215,9 +215,9 @@ const projects = [
   {
     title: "IdeaPolish.ai",
     description:
-      "An AI-enabled application that helps users evaluate and refine early-stage ideas through structured, AI-generated analysis.",
+      "An early-stage project that uses AI to help people explore, structure and improve their business ideas.",
     overview:
-      "An AI-enabled application that helps users evaluate and refine early-stage ideas through structured, AI-generated analysis.",
+      "An early-stage project that uses AI to help people explore, structure and improve their business ideas.",
     whatBuilt:
       "Built the backend workflow for submitting an idea, generating a structured analysis with Gemini and storing the results for later review and management.",
     keyFunctionality: [
@@ -313,7 +313,7 @@ export default function Projects() {
             </span>
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-gray-400 sm:text-base">
-            A selection of full-stack and AI-powered projects built with practical architecture, thoughtful interfaces and real project constraints.
+            Projects where I worked on real technical challenges — from AI and backend services to full-stack products.
           </p>
         </motion.div>
 
@@ -407,7 +407,7 @@ function ProjectCard({ project, onSelect }) {
           </div>
 
           <div className={`mt-auto inline-flex items-center justify-end gap-2 pt-6 text-sm font-medium ${accent.text}`}>
-            <span>View case study</span>
+            <span>Project overview</span>
             <FiArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover/card:translate-x-1" aria-hidden="true" />
           </div>
         </div>

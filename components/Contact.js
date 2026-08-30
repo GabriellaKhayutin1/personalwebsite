@@ -129,7 +129,7 @@ export default function Contact() {
           </h2>
           <div className="h-1 w-24 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full mb-6"></div>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            I&rsquo;m currently open to graduation internship opportunities from February 2027 and conversations about backend development, AI integration and product-focused software.
+            I&rsquo;m looking for a graduation internship from February 2027, ideally in a team where I can grow in backend development, AI and product-focused software, meet new people, develop as an individual and work on meaningful problem-solving challenges.
           </p>
         </motion.div>
 
@@ -145,7 +145,7 @@ export default function Contact() {
             <div>
               <h3 className="text-2xl font-bold mb-4 text-white">Get in Touch</h3>
               <p className="text-gray-300 mb-6">
-                Feel free to reach out about internship opportunities, software projects or potential collaborations. I&rsquo;d be happy to discuss how my experience could contribute to your team.
+                Whether it&rsquo;s an internship opportunity, a project idea or simply a conversation, feel free to get in touch. I&rsquo;d love to hear from you.
               </p>
             </div>
             
@@ -185,7 +185,7 @@ export default function Contact() {
                 <div>
                   <h4 className="text-lg font-medium text-gray-200">LinkedIn</h4>
                   <a 
-                    href="https://www.linkedin.com/in/gabriella-khayutin-6a6847229/" 
+                    href="https://www.linkedin.com/in/gabriella-khayutin/" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-purple-400 hover:underline"

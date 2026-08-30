@@ -48,7 +48,7 @@ export default function About() {
   const toolkitGroups = [
     {
       title: "Backend",
-      description: "Building reliable and maintainable server-side systems.",
+      description: "Building the systems behind a product.",
       icon: FiServer,
       color: "text-purple-300",
       iconBg: "bg-purple-500/15",
@@ -65,7 +65,7 @@ export default function About() {
     },
     {
       title: "AI & Integration",
-      description: "Building intelligent features and AI-enabled workflows.",
+      description: "Using AI where it can solve a real problem.",
       icon: FiCpu,
       color: "text-purple-300",
       iconBg: "bg-purple-500/15",
@@ -81,7 +81,7 @@ export default function About() {
     },
     {
       title: "Frontend",
-      description: "Creating responsive and accessible user experiences.",
+      description: "Making products clear, responsive and easy to use.",
       icon: FiMonitor,
       color: "text-blue-300",
       iconBg: "bg-blue-500/15",
@@ -130,7 +130,7 @@ export default function About() {
     },
     {
       title: "Tools & Workflow",
-      description: "Tools and practices I use to develop and deliver quality software.",
+      description: "The tools I use to build, test and deliver projects.",
       icon: FiTool,
       color: "text-cyan-300",
       iconBg: "bg-cyan-500/15",
@@ -154,7 +154,7 @@ export default function About() {
   const profileMetadata = [
     { icon: FiBookOpen, text: "HZ University of Applied Sciences" },
     { icon: FiMapPin, text: "Vlissingen, Netherlands" },
-    { icon: FiCalendar, text: "Graduation internship availability from February 2027" },
+    { icon: FiCalendar, text: "Available for a graduation internship from February 2027" },
   ];
 
   const experienceEntries = [
@@ -325,11 +325,11 @@ export default function About() {
             <h3 className="mt-4 text-4xl font-bold leading-tight text-white sm:text-5xl">
               What I{" "}
               <span className="text-purple-300">
-                Build With
+                Work With
               </span>
             </h3>
             <p className="mt-5 max-w-2xl text-base leading-8 text-gray-300">
-              Technologies I use to build backend systems, full-stack applications and AI-enabled products.
+              A mix of tools I&rsquo;ve used across projects, internships and team work.
             </p>
           </motion.div>
 
@@ -462,13 +462,10 @@ export default function About() {
               <div className="mx-auto mb-6 h-1 w-24 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 lg:mx-0"></div>
               <div className="mx-auto max-w-2xl space-y-4 text-center text-base leading-8 text-gray-300 sm:text-lg lg:mx-0 lg:text-left">
                 <p>
-                  I am a final-year Software Engineering student at HZ University of Applied Sciences, focused on backend development, AI integration and user-focused digital products.
+                  I&rsquo;m studying Software Engineering at HZ University of Applied Sciences in Vlissingen. Through internships and team projects, I&rsquo;ve built full-stack applications, AI features and a speech-to-text service for VR nursing training.
                 </p>
                 <p>
-                  I have experience building full-stack SaaS applications, speech-recognition services and AI-enabled features in multidisciplinary and international teams.
-                </p>
-                <p>
-                  I enjoy working where software, business and people connect, turning practical problems into clear and useful digital solutions.
+                  What I enjoy most is combining the technical side with the human side: understanding the problem, working with people and turning an idea into something useful.
                 </p>
               </div>
               <div className="mt-5 flex w-full flex-wrap items-center justify-center gap-x-4 gap-y-2.5 text-sm font-medium text-gray-400 lg:justify-start">
